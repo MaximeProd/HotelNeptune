@@ -1,0 +1,15 @@
+.LoginRegister{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.LoginRegister .Register, .LoginRegister .Login {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+.LoginRegister .Register input, .LoginRegister .Login input{
+  margin: 3px;
+  padding: 3px;
+}
