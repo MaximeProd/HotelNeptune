@@ -2,3 +2,4 @@
 //Deux variable $idClient et $bdd qui sont disponibles à chaque page.
 //Il Importe Fonctions.php
 //Et initie la session, plus d'info sur : //https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/4239476-session-cookies
+Bonsoir test
