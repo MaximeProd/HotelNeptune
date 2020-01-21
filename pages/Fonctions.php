@@ -39,7 +39,8 @@ function getListe(PDO $bdd,$askListe,Array $args = [],$search = False) {
         $argmodif = $arg . '%';
         $para = ':p_'.$key;
         var_dump($argmodif);
-        $statement->bindParam($para, $argmodif);
+        $statement->bindValue($para, $argmodif);
+        //$statement->bindParam($para, $argmodif);
     }
 
 
