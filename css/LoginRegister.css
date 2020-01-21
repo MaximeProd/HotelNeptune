@@ -1,15 +1,47 @@
 .LoginRegister{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 .LoginRegister .Register, .LoginRegister .Login {
-  padding: 10px;
+  padding: 2vw;
   display: flex;
   flex-direction: column;
   max-width: 200px;
 }
 .LoginRegister .Register input, .LoginRegister .Login input{
-  margin: 3px;
-  padding: 3px;
+  margin: 0.35vw;
+  padding: 0.35vw;
+}
+
+.LoginRegister hr{
+  height: 22vw;
+}
+
+.LoginRegister p{
+  color: white;
+  font-family: 'Acme', sans-serif;
+  font-size: 1vw;
+}
+
+.LoginRegister{
+  padding-top: 5vw;
+}
+
+.LoginRegister .Register, .LoginRegister .Login:last-child{
+  padding-top: 1vw;
+}
+
+#Connexion, #Enregistrer{
+  margin-top: 2vw;
+  cursor: pointer;
+  font-size: 0.9vw;
+  font-weight: bold;font-family: 'Acme', sans-serif;
+  border-radius: 1vw;
+}
+
+#Connexion:hover, #Enregistrer:hover{
+  color: white;
+  background-color: black;
+  font-family: 'Acme', sans-serif;
 }

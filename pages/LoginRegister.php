@@ -2,18 +2,27 @@
 require 'paterns/Head.php';
 //Partie code
 
-echo '<div class="LoginRegister">
+echo '</div>
+      <div class="LoginRegister">
         <link rel="stylesheet" href="../css/LoginRegister.css">
-        <form class="Login" action="loginRegister/Login.php" method="post">
-          <input type="text" name="username" value="" placeholder="Nom d\'utilisateur">
+        <form class="Login" action="Login.php" method="post">
+          <p>Déja inscrit?</p>
+          <input type="text" name="email" value="" placeholder="Email">
           <input type="text" name="mdp" value="" placeholder="Mot de passe">
-          <input type="submit" name="" value="Connexion">
+          <input id="Connexion" type="submit" name="" value="Connexion">
         </form>
-        <form class="Register" action="loginRegister/Register.php" method="post">
-          <input type="text" name="username" value="" placeholder="Nom d\'utilisateur">
+        <hr>
+        <form class="Register" action="Register.php" method="post">
+          <p>Créer un nouveau compte</p>
+          <input type="text" name="email" value="" placeholder="Email">
           <input type="text" name="mdp" value="" placeholder="Mot de passe">
           <input type="text" name="confirmMdp" value="" placeholder="Confirmer mot de passe">
-          <input type="submit" name="" value="S\'enregistrer">
+          <input type="text" name="Nom" value="" placeholder="Nom">
+          <input type="text" name="Prénom" value="" placeholder="Prénom">
+          <input type="text" name="Adresse" value="" placeholder="Adresse">
+          <input type="text" name="Ville" value="" placeholder="Ville">
+          <input type="text" name="Code postal" value="" placeholder="Code postal">
+          <input id="Enregistrer" type="submit" name="" value="S\'enregistrer">
         </form>
       </div>';
 

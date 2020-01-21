@@ -1,8 +1,9 @@
 main{
   background: linear-gradient(#2C0238, #602870) ;
-  position: absolute;
-  height: 100%;
   padding-bottom: 10px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 *{
   margin:0
