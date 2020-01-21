@@ -5,14 +5,14 @@ require 'paterns/Head.php';
 echo '</div>
       <div class="LoginRegister">
         <link rel="stylesheet" href="../css/LoginRegister.css">
-        <form class="Login" action="Login.php" method="post">
+        <form class="Login" action="loginRegister/Login.php" method="post">
           <p>Déja inscrit?</p>
-          <input type="text" name="email" value="" placeholder="Email">
+          <input type="text" name="prenom" value="" placeholder="prenom">
           <input type="text" name="mdp" value="" placeholder="Mot de passe">
           <input id="Connexion" type="submit" name="" value="Connexion">
         </form>
         <hr>
-        <form class="Register" action="Register.php" method="post">
+        <form class="Register" action="loginRegister/Register.php" method="post">
           <p>Créer un nouveau compte</p>
           <input type="text" name="email" value="" placeholder="Email">
           <input type="text" name="mdp" value="" placeholder="Mot de passe">
@@ -25,6 +25,8 @@ echo '</div>
           <input id="Enregistrer" type="submit" name="" value="S\'enregistrer">
         </form>
       </div>';
+
+
 
 //var_dump($_POST);
 //$hack = md5('Bonsoir');

@@ -14,8 +14,7 @@ function getDataBase() {
     return $bdd;
 }
 
-function getListe(PDO $bdd,$askListe,Array $args = [],$search = False) {
-    var_dump($args);
+function getListe(PDO $bdd,$askListe,Array $args = [], $search = False) {
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
     //Le(s) table au quel on veux accéder
@@ -31,27 +30,25 @@ function getListe(PDO $bdd,$askListe,Array $args = [],$search = False) {
         $query = "{$query} AND {$key} LIKE :p_{$key} ";
     }
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
-    var_dump($query);
-    $compteur = 0;
+
     $statement = $bdd->prepare($query);
     foreach ($args as $key => $arg) {
-        $compteur ++;
-        $argmodif = $arg . '%';
-        $para = ':p_'.$key;
-        var_dump($argmodif);
-        $statement->bindParam($para, $argmodif);
-    }
 
+        if ($search) {
+            var_dump($search);
+            $arg = $arg . '%';
+        }
+        $para = ':p_'.$key;
+        $statement->bindValue($para, $arg);
+    }
 
     //On réalise la requète et on renvoie le résultat
     $liste = null;
     if ($statement->execute()) {
-        var_dump($statement);
         $liste = $statement->fetchALL(PDO::FETCH_OBJ);
         //On finie par fermer la ressource
         $statement->closeCursor();
     }
-    var_dump($liste);
     return $liste;
 }
 
