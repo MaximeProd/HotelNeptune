@@ -58,7 +58,7 @@ echo '
     <main>
       <div class="liste">
         <li><a href="index.php">Accueil</a></li>
-        <li><a href="MesReservations.php">Mes réservation</a></li>
+        <li><a href="MesReservations.php">Mes réservations</a></li>
         '.$pageAdmin.'
         <li><a href="'.$lien.'">'.$Compte.'</a></li>
       </div>
