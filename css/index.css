@@ -1,13 +1,13 @@
 main{
   background: linear-gradient(#2C0238, #602870) ;
-  padding-bottom: 10px;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  overflow: hidden;
+  height:100%;
+  width:100%;
+  font-size: 1vw;
+  color:#FFF;
 }
 *{
   margin:0
+
 }
 /*
 .fake{
@@ -15,8 +15,8 @@ main{
 }
 */
 header img{
-  height: 150px;
-  width: 150px;
+  height: 10vw;
+  width: 10vw;
 }
 
 .haut{
@@ -27,7 +27,7 @@ header img{
 }
 
 h1{
-  font-size: 50px;
+  font-size: 5vw;
   color: white;
   font-family: 'Sniglet', sans-serif;
 }
@@ -39,7 +39,7 @@ h2{
   position: sticky;
   top:0;
   background: linear-gradient(to right,#2C0238, #7D488C);
-  height: 40px;
+  height: 2vw;
   font-family: 'Acme', sans-serif;
   display: flex;
   justify-content: space-around;
@@ -52,9 +52,9 @@ h2{
   justify-content: center;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.5vw;
   color: white;
-  min-width: 100px;
+  min-width: 10vw;
 }
 .liste li:hover{
   display: flex;
@@ -62,8 +62,8 @@ h2{
   text-decoration: none;
   background-image: radial-gradient(ellipse at 50% 110%, rgba(255,255,255,0.50)10%,transparent 75%);
   height: fill;
-  padding-bottom: 10px;
-  min-width: 100px;
+  padding-bottom: 0.25w;
+  min-width: 1vw;
 }
 footer {
   position: fixed;
@@ -72,11 +72,11 @@ footer {
   background-color: #4C0099;
 }
 .footer{
-  height: 60px;
+  height: 4vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 20px;
+  font-size: 1vw;
 }
 
 .footer a, .Copyright p{
@@ -86,18 +86,21 @@ footer {
   justify-content: center;
   font-family: 'Acme', sans-serif;
   color: grey;
+  font-size: 1vw;
 }
 .footer a:hover{
-  text-shadow: 5px 0px 9px black;
+  text-shadow: 140vw 0 9vw black;
   color: white;
 }
 
 /*Chambre*/
 .chambre img{
     border: red solid;
-    border-radius: 10px ;
+    border-radius: 1vw ;
     max-width: 100%;
     max-height: 100%;
+    height: 10vw;
+    width: 10vw;
 
 }
 .fake {
@@ -108,20 +111,20 @@ footer {
   display: flex;
   flex-direction: row;
   background: grey;
-  margin: 10px;
+  margin: 2vw;
   border: transparent solid ;
-  border-radius: 10px ;
-  box-shadow: 15px 10px 15px black;
-  height: 150px;
-  padding:5px;
-  max-width: 80%
+  border-radius: 1vw ;
+  box-shadow: 1.5vw 1vw 1.5vw black;
+  height: auto;
+  padding:0.5vw;
+  max-width: 80%;
 
 }
 
 .chambre p{
-  font-size: 20px;
+  font-size: 1vw;
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 1vw;
   overflow:scroll;
 }
 ::-webkit-scrollbar {
@@ -130,7 +133,8 @@ footer {
   font-family: 'Acme', sans-serif;
   display: flex;
   flex-direction: column;
-  padding-left:5px;
+  padding-left:0.5vw;
+  font-size:1.25vw;
 
 }
 .chambre form{
@@ -138,9 +142,9 @@ footer {
 }
 .chambre input{
   border: transparent solid;
-  font-size: 20px;
-  padding:2px 8px 10px 8px;
-  border-radius:8px;
+  font-size: 1vw;
+  padding:0.5vw 0.75vw 0.5vw 0.75vw;
+  border-radius:2vw;
   background:red;
   font-family: 'Acme', sans-serif;
   color:#fff;

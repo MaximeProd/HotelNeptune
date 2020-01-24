@@ -7,11 +7,15 @@ require 'paterns/Head.php';
 require 'Fonctions.php';
 var_dump($idClient);
 $bdd = getDataBase();
-$chambres = getListe($bdd,"chambres");
-if($chambres){
-    displayChambre($chambres);
+if (isset($bdd)) {
+    $chambres = getListe($bdd,"chambres");
+    if($chambres){
+        displayChambre($chambres);
+    } else {
+        echo "<p>Aucun résultat trouvé</p>";
+    }
 } else {
-    echo "<p>Aucun résultat trouvé</p>";
+    echo "Serveur introuvable";
 }
 
 ?>
