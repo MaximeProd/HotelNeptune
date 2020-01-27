@@ -7,7 +7,7 @@ echo '</div>
         <link rel="stylesheet" href="../css/LoginRegister.css">
         <form class="Login" action="loginRegister/Login.php" method="post">
           <p>Déja inscrit?</p>
-          <input type="text" name="prenom" value="" placeholder="prenom">
+          <input type="text" name="email" value="" placeholder="email">
           <input type="text" name="mdp" value="" placeholder="Mot de passe">
           <input id="Connexion" type="submit" name="" value="Connexion">
         </form>
