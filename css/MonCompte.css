@@ -1,0 +1,54 @@
+#Supr, #Modif, #Deco{
+    margin-top: 2vw;
+    cursor: pointer;
+    font-size: 0.9vw;
+    font-weight: bold;font-family: 'Acme', sans-serif;
+    border-radius: 1vw;
+}
+
+#Supr:hover, #Modif:hover, #Deco:hover{
+    color: white;
+    background-color: black;
+    font-family: 'Acme', sans-serif;
+}
+
+#Deco{
+    margin-top: 7.4vw;
+    margin-left: 40.4vw;
+}
+
+#Supr, #Modif{
+    margin-top: 7.4vw;
+}
+
+.bandeau{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60%;
+}
+
+.cadre{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.formulaire{
+    display: flex;
+    flex-direction: column;
+    width: 9vw;
+    margin-top: 5.4vw;
+    margin-left: 5vw;
+    color: white;
+}
+
+.formulaire input{
+    margin: 0.5vw;
+    padding: 0.3vw;
+    width: 8vw;;
+}
+
+.bandeau p{
+    font-size: 3vw;
+    color: white;
+    margin-left: 25vw;
+}
