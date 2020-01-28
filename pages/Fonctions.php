@@ -25,7 +25,7 @@ function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
 
     $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
-    var_dump($query);
+    //var_dump($query);
 
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
@@ -49,11 +49,11 @@ function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search
     if ($statement->execute()) {
         $liste = $statement->fetchALL(PDO::FETCH_OBJ);
         //On finie par fermer la ressource
-
     }
     $statement->closeCursor();
     return $liste;
 }
+
 function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
@@ -62,19 +62,17 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     // array(arg1 => modif1, arg2 => modif2, etc)
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
-    //ET AUSSI il faut donner l'id de l'éllement à modifer
-
-    $query = "UPDATE {$fromTable}";
-    var_dump($query);
-
+    //ET AUSSI il faut donner l'id de l'éllement à modife
+    var_dump($idModif);
+    $query = "UPDATE {$fromTable} SET id={$idModif} ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
-        $query = "{$query} SET {$key} = :p_{$key} ";
+        $query = "{$query} , {$key} = :p_{$key} ";
     }
     $query = "{$query} WHERE id = {$idModif}";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
-
+    //$statement->bindValue(':p_id', $idModif);
     foreach ($args as $key => $arg) {
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);

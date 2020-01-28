@@ -3,12 +3,12 @@ echo '
 </main>
     <footer>
       <div class="footer">
-        <a href="#">Qui somme-nous? </a>
-        <a href="#">Tarif </a>
-        <a href="#">Mention légale </a>
-        <a href="#">Asssistance </a>
-        <a href="#">Fonctionnement Du Site </a>
-        <a href="#">Aide </a>
+        <a href="paterns/Foot.php">Qui somme-nous? </a>
+        <a href="paterns/Foot.php">Tarif </a>
+        <a href="paterns/Foot.php">Mention légale </a>
+        <a href="paterns/Foot.php">Asssistance </a>
+        <a href="paterns/Foot.php">Fonctionnement Du Site </a>
+        <a href="paterns/Foot.php">Aide </a>
       </div>
       <div class="Copyright">
         <p>© Copyright 2020</p>

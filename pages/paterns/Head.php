@@ -4,10 +4,12 @@ $idClient = null;
 $Compte = 'Se connecter/Inscription';
 $lien = "LoginRegister.php";
 if (isset($_SESSION['idClient'])){
+    var_dump($idClient);
     $idClient = $_SESSION['idClient'];
     $Compte = 'Mon Compte';
     $lien = "MonCompte.php";
 }
+//var_dump($idClient);
 
 $_SESSION['admin'] = False;
 $admin = null;
