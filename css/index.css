@@ -66,9 +66,7 @@ h2{
   min-width: 1vw;
 }
 footer {
-  position: fixed;
   width: 100%;
-  bottom: 0;
   background-color: #4C0099;
 }
 .footer{

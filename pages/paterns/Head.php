@@ -45,19 +45,7 @@ echo '
         <h1>Hotel Neptune</h1>
       </div>
     </header>
-    <footer>
-      <div class="footer">
-        <a href="#">Qui somme-nous? </a>
-        <a href="#">Tarif </a>
-        <a href="#">Mention légale </a>
-        <a href="#">Asssistance </a>
-        <a href="#">Fonctionnement Du Site </a>
-        <a href="#">Aide </a>
-      </div>
-      <div class="Copyright">
-        <p>© Copyright 2020</p>
-      </div>
-    </footer>
+
     <main>
       <div class="liste">
         <li><a href="index.php">Accueil</a></li>

@@ -15,7 +15,7 @@ function getDataBase() {
     return $bdd;
 }
 
-function getListe(PDO $bdd,$askListe,Array $args = [], $search = False) {
+function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search = False) {
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
     //Le(s) table au quel on veux accéder
@@ -24,7 +24,8 @@ function getListe(PDO $bdd,$askListe,Array $args = [], $search = False) {
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
 
-    $query = "SELECT * FROM {$askListe} WHERE 1 ";
+    $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
+    var_dump($query);
 
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
@@ -48,10 +49,48 @@ function getListe(PDO $bdd,$askListe,Array $args = [], $search = False) {
     if ($statement->execute()) {
         $liste = $statement->fetchALL(PDO::FETCH_OBJ);
         //On finie par fermer la ressource
-        $statement->closeCursor();
+
     }
+    $statement->closeCursor();
     return $liste;
 }
+function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
+    //Pour utiliser cette fonction il faut lui envoyer :
+    //La bdd
+    //Le(s) table au quel on veux accéder
+    //Une liste des modifs à faire :
+    // array(arg1 => modif1, arg2 => modif2, etc)
+    //Avec un exemple :
+    // array( 'idClient' => 15, 'prenom' => 'Maxime')
+    //ET AUSSI il faut donner l'id de l'éllement à modifer
+
+    $query = "UPDATE {$fromTable}";
+    var_dump($query);
+
+    //Etape 1 : On génère la requête sql avec les arguments demandés :
+    foreach ($args as $key => $arg) {
+        $query = "{$query} SET {$key} = :p_{$key} ";
+    }
+    $query = "{$query} WHERE id = {$idModif}";
+    //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
+    $statement = $bdd->prepare($query);
+
+    foreach ($args as $key => $arg) {
+        $para = ':p_'.$key;
+        $statement->bindValue($para, $arg);
+    }
+    var_dump($statement);
+    //On réalise l'update
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+
+
+
+
+
+
 
 function getPost($askGet){
     if (isset($_POST[$askGet])) {
@@ -85,3 +124,20 @@ function displayChambre($chambres)
             echo "<p>Aucun résulat</p>";
         }
 }
+
+
+/*
+ Générateur d'email
+foreach ($personnes as $personne){
+    $id = $personne-> id;
+    $email = mb_strtolower($personne-> prenom) .'-'. strtolower($personne-> nom) .'-'. $personne-> id.'@fakemail.fr';
+    $query = "update membres set email='{$email}' where id=".$id;
+    var_dump($query);
+
+    $statement = $bdd->prepare($query);
+    $statement->execute();
+    $statement->closeCursor();
+
+
+}
+*/

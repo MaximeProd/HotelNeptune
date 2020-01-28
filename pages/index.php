@@ -17,7 +17,7 @@ if (isset($bdd)) {
 } else {
     echo "Serveur introuvable";
 }
-
+require 'paterns/Foot.php';
 ?>
 
 

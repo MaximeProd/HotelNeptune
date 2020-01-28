@@ -2,26 +2,39 @@
 require 'paterns/Head.php';
 //Partie code
 
+$erreur = '';
+
+if (isset($_SESSION["erreur"])){
+    if ($_SESSION["erreur"] == 1){
+        $erreur = 'Veuillez contacter l\'administrateur dès les plus bref délai!!';
+    } elseif ($_SESSION["erreur"] == 2) {
+        $erreur = 'Mot de passe ou email incorrect';
+    } elseif ($_SESSION["erreur"] == 3) {
+        $erreur = 'Email incorrect';
+    }
+    unset($_SESSION["erreur"]);
+}
 echo '</div>
+    <p>'.$erreur.'</p>
       <div class="LoginRegister">
         <link rel="stylesheet" href="../css/LoginRegister.css">
         <form class="Login" action="loginRegister/Login.php" method="post">
           <p>Déja inscrit?</p>
-          <input type="text" name="email" value="" placeholder="email">
-          <input type="text" name="mdp" value="" placeholder="Mot de passe">
+          <input type="email"    name="email" value="" placeholder="email">
+          <input type="password" name="mdp"   value="" placeholder="Mot de passe">
           <input id="Connexion" type="submit" name="" value="Connexion">
         </form>
         <hr>
         <form class="Register" action="loginRegister/Register.php" method="post">
           <p>Créer un nouveau compte</p>
-          <input type="text" name="email" value="" placeholder="Email">
-          <input type="text" name="mdp" value="" placeholder="Mot de passe">
-          <input type="text" name="confirmMdp" value="" placeholder="Confirmer mot de passe">
-          <input type="text" name="Nom" value="" placeholder="Nom">
-          <input type="text" name="Prénom" value="" placeholder="Prénom">
-          <input type="text" name="Adresse" value="" placeholder="Adresse">
-          <input type="text" name="Ville" value="" placeholder="Ville">
-          <input type="text" name="Code postal" value="" placeholder="Code postal">
+          <input type="email" name="email"           placeholder="Email"          maxlength="250" >
+          <input type="password" name="mdp"          placeholder="Mot de passe"            maxlength="16"     minlength="6">
+          <input type="password" name="confirmMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="6">
+          <input type="text" name="nom"              placeholder="Nom"            maxlength="100" minlength="3">
+          <input type="text" name="prenom"           placeholder="Prénom"         maxlength="70"  minlength="3" >
+          <input type="text" name="adresse"          placeholder="Adresse"        maxlength="200">
+          <input type="text" name="ville"            placeholder="Ville"          maxlength="200">
+          <input type="text" name="codePostal"       placeholder="Code postal"    maxlength="10">
           <input id="Enregistrer" type="submit" name="" value="S\'enregistrer">
         </form>
       </div>';

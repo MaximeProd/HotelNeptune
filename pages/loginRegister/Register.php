@@ -1,18 +1,6 @@
 <?php
 require '../Fonctions.php';
-$username = getPost('username');
-$mdp = getPost('mdp');
+var_dump($_POST);
 $bdd = getDataBase();
-$personnes = getListe($bdd,'membres');
-foreach ($personnes as $personne){
-    $id = $personne-> id;
-    $email = mb_strtolower($personne-> prenom) .'-'. strtolower($personne-> nom) .'-'. $personne-> id.'@fakemail.fr';
-    $query = "update membres set email='{$email}' where id=".$id;
-    var_dump($query);
-    /*
-    $statement = $bdd->prepare($query);
-    $statement->execute();
-    $statement->closeCursor();
-
-    */
-}
+$cryptPassword = password_hash('Cartoon-11',PASSWORD_DEFAULT);
+updateListe($bdd,'membres',Array('mdp'=>$cryptPassword),160);
