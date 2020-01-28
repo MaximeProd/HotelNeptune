@@ -7,7 +7,7 @@
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206',
-            'maxime.bourrier', 'Cartoon-11', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            'maxime.bourrier', 'password', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     } catch (Exception $exception) {
         $bdd = null;

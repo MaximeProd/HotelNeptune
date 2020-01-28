@@ -32,6 +32,7 @@ echo '
     <title>Hotel Neptune</title>
     <link rel="stylesheet" href="../css/index.css">
     <link href="https://fonts.googleapis.com/css?family=Acme|Sniglet&display=swap" rel="stylesheet">
+    
     <!--
     font-family: "Sniglet", cursive; →Titre
     font-family: "Acme", sans-serif; →Texte
