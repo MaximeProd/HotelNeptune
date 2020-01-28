@@ -10,7 +10,7 @@ $bdd = getDataBase();
 if (isset($bdd)) {
     $chambres = getListe($bdd,"chambres");
     if($chambres){
-        displayChambre($chambres);
+        displayChambre($chambres , $bdd);
     } else {
         echo "<p>Aucun résultat trouvé</p>";
     }

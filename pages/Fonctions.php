@@ -61,17 +61,19 @@ function getPost($askGet){
     }
 }
 
-function displayChambre($chambres)
+function displayChambre($chambres , $bdd)
 {
     if ($chambres) {
         foreach ($chambres as $chambre) {
             // Afficher
             echo '
         <div class="chambre">
-          <img src="images/neptune.png">
+       
+          <img src="images/chambre'.$chambre->numero.'_1.png">
           <div class="division">
-            <h2>Chambreeee ' . $chambre->numero . '</h2>
+            <h2>Chambre ' . $chambre->numero . '</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  </p>
+            <p>Prix : '. (getListe($bdd,"tarifs", array("id"=>($chambre->tarif_id)))[0])->prix  . '€ </p>
             <form action="PageReservation.php" method="POST">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
