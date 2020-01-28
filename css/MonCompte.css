@@ -1,4 +1,4 @@
-#Supr, #Modif, #Deco{
+#Supr, #Modif, #Deco, #Mdp{
     margin-top: 2vw;
     cursor: pointer;
     font-size: 0.9vw;
@@ -6,19 +6,32 @@
     border-radius: 1vw;
 }
 
-#Supr:hover, #Modif:hover, #Deco:hover{
+#Supr:hover, #Modif:hover, #Mdp:hover{
     color: white;
     background-color: black;
     font-family: 'Acme', sans-serif;
 }
 
 #Deco{
-    margin-top: 7.4vw;
-    margin-left: 40.4vw;
+    margin-bottom: 1vw;
+    margin-left: 53vw;
+    background-color: red;
+    color: white;
 }
 
-#Supr, #Modif{
-    margin-top: 7.4vw;
+#Deco:hover{
+    color: red;
+    background-color: white;
+    font-family: 'Acme', sans-serif;
+}
+
+#Mdp{
+    margin-top: 2vw;
+    cursor: pointer;
+    font-size: 0.9vw;
+    font-weight: bold;font-family: 'Acme', sans-serif;
+    border-radius: 1vw;
+    width: 9vw;
 }
 
 .bandeau{
@@ -32,22 +45,37 @@
     height: 100%;
 }
 
-.formulaire{
+.formulaire form{
     display: flex;
     flex-direction: column;
     width: 9vw;
-    margin-top: 5.4vw;
-    margin-left: 5vw;
-    color: white;
 }
 
 .formulaire input{
     margin: 0.5vw;
     padding: 0.3vw;
-    width: 8vw;;
+    width: 8vw;
 }
 
-.bandeau p{
+.formulaire h4{
+    font-size: 2vw;
+    color: white;
+    margin-bottom: 1.5vw;
+}
+
+.formulaire{
+    margin-top: 1.4vw;
+    margin-left: 5vw;
+    color: white;
+}
+
+.formulaire hr{
+    width: 80%;
+    margin-left: -3vw;
+    margin-bottom: 1vw;
+}
+
+.bandeau h3{
     font-size: 3vw;
     color: white;
     margin-left: 25vw;
