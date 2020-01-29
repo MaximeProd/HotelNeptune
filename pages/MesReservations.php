@@ -8,5 +8,5 @@ echo 'Bonsoir';
 
 
 
-
+require 'paterns/Foot.php';
 ?>

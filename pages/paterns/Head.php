@@ -1,23 +1,24 @@
 <?php
 session_start();
+require 'Fonctions.php';
 $idClient = null;
 $Compte = 'Se connecter/Inscription';
 $lien = "LoginRegister.php";
 if (isset($_SESSION['idClient'])){
-    var_dump($idClient);
     $idClient = $_SESSION['idClient'];
     $Compte = 'Mon Compte';
     $lien = "MonCompte.php";
 }
-//var_dump($idClient);
+var_dump($idClient);
 
-$_SESSION['admin'] = False;
-$admin = null;
+$bdd = getDataBase();
 $pageAdmin = '';
-if (isset($_SESSION['admin'])){
-    $admin = $_SESSION['admin'];
-    if ($admin == 1){
-    $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>';
+if (!empty($bdd)) {
+    if (isset($_SESSION['idClient'])) {
+        $liste = getListe($bdd, 'membres', Array('id' => $idClient), 'admin');
+        if ($liste[0]->admin == 1) {
+            $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>';
+        }
     }
 }
 

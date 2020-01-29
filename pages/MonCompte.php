@@ -1,7 +1,7 @@
 <?php
 //Une variable $idClient est disponible à chaque page.
 require 'paterns/Head.php';
-require "Fonctions.php";
+
 //Partie code
 $bdd = getDataBase();
 $membre = getListe($bdd,"membres", array("id"=>$idClient));
@@ -31,12 +31,13 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
               <h4>Modifier mot de passe</h4>
               <hr>
               <form class="" action="index.html" method="post">
-                  <input type="password" name="mdp"          placeholder="Mot de passe"            maxlength="16"     minlength="6">
-                  <input type="password" name="confirmMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="6">
                 <label for="Mot de passe">Mot de passe</label>
-                <label for="Nouveau mot de passe">Nouveau mot de passe</label>
-                <label for="Comfirmer mot de passe">Comfirmer mot de passe</label><input type="text" name="Comfirmer mot de passe" value="" placeholder="Comfirmer mot de passe">
-                <input id="Mdp" type="submit" name="" value="Modifier mot de passe">
+                <input type="password" name="mdp"          placeholder="Mot de passe"        maxlength="16"     minlength="6">
+                <label for="newMdp">Nouveau mot de passe</label>
+                <input type="password" name="newMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="6">
+                <label for="confMdp">Comfirmer mot de passe</label>
+                <input type="text" name="confMdp" placeholder="Comfirmer mot de passe"       maxlength="16"     minlength="6">
+                <input id="Mdp" type="submit" name="confirmMdp" value="Modifier mot de passe">
               </form>
             </div>
             <div class="formulaire">
@@ -46,20 +47,18 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
                 <label for="Mot de passe">Mot de passe</label><input type="text" name="Mot de passe" value="" placeholder="Mot de passe">
                 <input id="Supr" type="submit" name="" value="Supprimer">
               </form>
+              <form class="Register" action="loginRegister/Logout.php" method="post">
+                <input id="Deco" type="submit" name="" value="Se déconnecter">
+              </form>
             </div>
-            <input id="Deco" type="submit" name="" value="Se déconnecter">
           </div>
         </div>';
-echo '
-<form class="Register" action="loginRegister/Logout.php" method="post">
-    <input type="submit" name="" value="Se déconnecter">
-</form>
-       ';
+
+
+
+
 
 
 
 require 'paterns/Foot.php';
-
-
-
 ?>

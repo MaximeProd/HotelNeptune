@@ -85,11 +85,6 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
 
 
 
-
-
-
-
-
 function getPost($askGet){
     if (isset($_POST[$askGet])) {
         return htmlspecialchars($_POST[$askGet]);
@@ -104,6 +99,7 @@ function displayChambre($chambres)
         foreach ($chambres as $chambre) {
             // Afficher
             echo '
+         <link rel="stylesheet" href="../css/celluleChambre.css">
         <div class="chambre">
           <img src="images/chambre'.$chambre->numero.'_1.png">
           <div class="division">

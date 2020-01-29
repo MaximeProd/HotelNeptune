@@ -45,4 +45,5 @@ echo '</div>
 //$hack = md5('Bonsoir');
 //var_dump($hack);
 //Fin partie code
+require 'paterns/Foot.php';
 ?>
