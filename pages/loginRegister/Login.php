@@ -3,7 +3,8 @@ session_start();
 require '../Fonctions.php';
 
 $listPost = $_POST;
-
+$_SESSION["erreur"] = 0;
+$_SESSION['savePostLogin'] = $_POST;
 //var_dump($listPost);
 if (isset($listPost['mdp']) AND isset($listPost['email'])){
     $bdd = getDatabase();
@@ -15,6 +16,7 @@ if (isset($listPost['mdp']) AND isset($listPost['email'])){
         if(count($liste)==1 && password_verify($password,$liste[0]->mdp)){
             $idClient = $liste[0]->id;
             $_SESSION['idClient'] = $idClient;
+            unset($_SESSION['savePostLogin']);
             header('Location: ../index.php');
         } elseif (count($liste) > 1){
             $_SESSION['idClient'] = $idClient;
@@ -28,9 +30,7 @@ if (isset($listPost['mdp']) AND isset($listPost['email'])){
         //Erreur aussi fréquente : L'email n'est pas reconnu
         $_SESSION["erreur"] = 3;
     }
-    if (isset($_SESSION["erreur"])){
-        header('Location: ../LoginRegister.php');
-    }
+    header('Location: ../LoginRegister.php');
 }
 
 

@@ -4,6 +4,11 @@
 //https://openclassrooms.com/fr/courses/918836-concevez-votre-site-web-avec-php-et-mysql/4239476-session-cookies
 //Array :
 //https://www.php.net/manual/fr/control-structures.foreach.php
+//Récupérer donnée column
+//https://www.php.net/manual/fr/pdostatement.getcolumnmeta.php
+//Récupérer entre parenthèse
+//https://www.developpez.net/forums/d1469403/php/langage/recuperer-chaine-entre-parentheses/
+//https://www.developpez.net/forums/d812317/bases-donnees/oracle/outils/sql-plus/connaitre-type-champs-d-table/
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206',
@@ -23,21 +28,16 @@ function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search
     // array(arg1 => value1, arg2 => value 2, etc)
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
-
     $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
-    //var_dump($query);
-
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
         $query = "{$query} AND {$key} LIKE :p_{$key} ";
     }
-    //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
 
+    //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
     foreach ($args as $key => $arg) {
-
         if ($search) {
-            //var_dump($search);
             $arg = $arg . '%';
         }
         $para = ':p_'.$key;
@@ -85,6 +85,56 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
 
 
 
+
+function insertListe(PDO $bdd,$toTable,Array $args) {
+    //Pour utiliser cette fonction il faut lui envoyer :
+    //La bdd
+    //Le(s) table au quel on veux insérer
+    //Une liste des insertion à faire :
+    // array(arg1 => modif1, arg2 => modif2, etc)
+    //Avec un exemple :
+    // array( 'idClient' => 15, 'prenom' => 'Maxime')
+
+    foreach ($args as $key => $arg) {
+        $tableValues = ",{$key}";
+        $values = ",:p_{$key}";
+    }
+    $query = "INSERT INTO {$toTable}(id{$tableValues}) VALUES (null{$values}) ";
+    //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
+    $statement = $bdd->prepare($query);
+    foreach ($args as $key => $arg) {
+        $para = ':p_'.$key;
+        $statement->bindValue($para, $arg);
+    }
+    var_dump($statement);
+    //On réalise l'insertion
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Fonction utilitaire :
+function extractFromParenthese($string){
+    $tmp1 = strrchr($string, '(');
+    $extract = substr($tmp1, 0, strpos($tmp1, ')') + 1);
+    $extract = str_replace(array( "(", ")"), "", $extract);
+    return $extract;
+}
+
+
 function getPost($askGet){
     if (isset($_POST[$askGet])) {
         return htmlspecialchars($_POST[$askGet]);
@@ -93,6 +143,7 @@ function getPost($askGet){
     }
 }
 
+/*
 function displayChambre($chambres)
 {
     if ($chambres) {
@@ -118,7 +169,7 @@ function displayChambre($chambres)
             echo "<p>Aucun résulat</p>";
         }
 }
-
+*/
 
 /*
  Générateur d'email
@@ -131,7 +182,28 @@ foreach ($personnes as $personne){
     $statement = $bdd->prepare($query);
     $statement->execute();
     $statement->closeCursor();
-
-
 }
+*/
+
+/*
+//Fonction pour encrypter un mot de passe
+var_dump($_POST);
+$bdd = getDataBase();
+$cryptPassword = password_hash('espagne34',PASSWORD_DEFAULT);
+updateListe($bdd,'membres',Array('mdp'=>$cryptPassword),161);
+*/
+
+
+//TEST CHECK ATRIBUTE COLONNE SQL
+/*
+$liste = getListe($bdd,'membres');
+$select = $bdd->query('SELECT * FROM membres WHERE id = 1');
+for ($i =0; $i < $select->columnCount();$i++){
+    $test = $select->getColumnMeta($i);
+    var_dump($test['len']);
+    var_dump($test['name']);
+}
+$test2 = $select->getAttribute('email');
+var_dump($test);
+var_dump($test2);
 */
