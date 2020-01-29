@@ -49,6 +49,7 @@ if(!empty($membres)) {
             <td>'.$membre->prenom.'</td>
             <td>'.$membre->email.'</td>
             <th><a href="#">Voir</a></th>
+            <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
             </tr>
             </tbody>';
     }

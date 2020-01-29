@@ -22,15 +22,18 @@ if (isset($listPost['mdp']) AND isset($listPost['email'])){
             $_SESSION['idClient'] = $idClient;
             //Erreur : Il existe plusieur client avec la même adresse mail!! Grosse erreur d'identification!
             $_SESSION["erreur"] = 1;
+            header('Location: ../LoginRegister.php');
         } else {
             //Erreur fréquente : le mot de passe ou l'email ne correspond pas
             $_SESSION["erreur"] = 2;
+            header('Location: ../LoginRegister.php');
         }
     } else {
         //Erreur aussi fréquente : L'email n'est pas reconnu
         $_SESSION["erreur"] = 3;
+        header('Location: ../LoginRegister.php');
     }
-    header('Location: ../LoginRegister.php');
+
 }
 
 

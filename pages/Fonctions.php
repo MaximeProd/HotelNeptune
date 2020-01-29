@@ -94,10 +94,11 @@ function insertListe(PDO $bdd,$toTable,Array $args) {
     // array(arg1 => modif1, arg2 => modif2, etc)
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
-
+    $tableValues = '';
+    $values = '';
     foreach ($args as $key => $arg) {
-        $tableValues = ",{$key}";
-        $values = ",:p_{$key}";
+        $tableValues = "{$tableValues},{$key}";
+        $values = "{$values},:p_{$key}";
     }
     $query = "INSERT INTO {$toTable}(id{$tableValues}) VALUES (null{$values}) ";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)

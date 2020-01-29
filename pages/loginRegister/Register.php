@@ -6,6 +6,7 @@ $bdd = getDataBase();
 $insert = Array();
 $_SESSION["erreur"] = 0;
 $_SESSION['savePostRegister'] = $_POST;
+
 if (isset($_POST)){
     /*
     //Vérification de la complétion du formulaire :
@@ -32,8 +33,12 @@ if ($_SESSION["erreur"] == 0) {
     $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
     //Génération membre :
     unset($_POST['confirmMdp']);
+    //var_dump($_POST);
     insertListe($bdd,'membres',$_POST);
     unset($_SESSION['savePostRegister']);
+    $liste = getListe($bdd,'membres',Array("email" => $listPost['email']),'id');
+    $_SESSION["idClient"] = $liste[0]->id;
+    var_dump($liste[0]->id);
     header('Location: ../index.php');
 } else {
     header('Location: ../LoginRegister.php');
