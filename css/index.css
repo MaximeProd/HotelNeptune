@@ -17,6 +17,7 @@ main{
   font-size: 1vw;
   color:#FFF;
   padding-bottom: 1vw;
+
 }
 /*Fake Header*/
 header img{
@@ -72,9 +73,11 @@ h2{
 }
 
 /*FOOTER*/
-footer {
-  position: relative;
+body{
 
+}
+
+footer {
   width: 100%;
   background-color: #4C0099;
 }

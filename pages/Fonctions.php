@@ -37,7 +37,7 @@ function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search
     foreach ($args as $key => $arg) {
 
         if ($search) {
-            var_dump($search);
+            //var_dump($search);
             $arg = $arg . '%';
         }
         $para = ':p_'.$key;
