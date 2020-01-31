@@ -14,7 +14,7 @@
 
 #Deco{
     margin-bottom: 1vw;
-    margin-left: 53vw;
+    margin-left: 45vw;
     background-color: red;
     color: white;
 }
@@ -36,8 +36,9 @@
 
 .bandeau{
     background-color: rgba(0, 0, 0, 0.5);
-    height: fill;
+    height: 100%;
     width: 60%;
+    margin-bottom: -1vw;
 }
 
 .cadre{
