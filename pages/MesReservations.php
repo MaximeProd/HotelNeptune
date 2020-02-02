@@ -1,8 +1,63 @@
 <?php
-
 require 'paterns/Head.php';
 
-//getListe($bdd,'');
+if (isset($bdd)){
+    if ($idClient !=0) {
+        $search = Array();
+        //On précomplèe une liste pour avoir le tableau associatif avec toute les clées
+        if (isset($_POST)){
+            $listeElement = Array('chambre_id','jour');
+            foreach ($listeElement as $item) {
+                if (isset($_POST[$item])){
+                    $search += [$item => $_POST[$item]];
+                }   else {
+                    $search += [$item => ""];
+                }
+            }
+        }
+        //Augmenter la fonction getliste en mettant une liste dans le search
+        $chambres = getListe($bdd,'planning',Array('client_id'=>$idClient,'chambre_id'=>$search['chambre_id']),Array('jour'=>$search['jour']),'*');
+        echo  '   
+           <link rel="stylesheet" href="../css/GérerMembres.css">
+           <table>
+              <caption>Liste des membres</caption>
+               <thead> 
+                <tr> 
+                  <th>Nom</th>
+                  <th>Date</th>
+                </tr>
+               </thead>
+               <thead> 
+                <tr>
+                  <form autocomplete="off" class="" action="MesReservations.php" method="post">
+                  <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
+                  <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
+                  <th><input type="submit" name="" ></th>
+                  <th></th>
+                  </form> 
+                </tr>
+               </thead>
+              ';
+        if(!empty($chambres)) {
+            foreach ($chambres as $chambre) {
+                echo
+                    '<tbody>
+                    <tr>
+                    <td>'.$chambre->chambre_id.'</td>
+                    <td>'.$chambre->jour.'</td>
+                    <th><a href="#">Voir</a></th>
+                        </tr>
+                    </tbody>';
+            }
+        }
+        echo '
+            </table>
+        </table>';
+
+    } else {
+    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connection < </a>');
+    }
+}
 
 require 'paterns/Foot.php';
 ?>

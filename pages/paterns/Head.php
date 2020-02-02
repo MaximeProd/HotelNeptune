@@ -12,21 +12,24 @@ if (isset($_SESSION['idClient'])){
 var_dump($idClient);
 
 $bdd = getDataBase();
-$pageAdmin = '';
-if (!empty($bdd)) {
-    if (isset($_SESSION['idClient'])) {
-        $liste = getListe($bdd, 'membres', Array('id' => $idClient), 'admin');
-        if ($liste[0]->admin == 1) {
-            $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>';
+$pageAdmin = null;
+$admin = false;
+if (isset($bdd)){
+    $pageAdmin = '';
+    if (!empty($bdd)) {
+        if (isset($_SESSION['idClient'])) {
+            $liste = getListe($bdd, 'membres', Array('id' => $idClient),Array(), 'admin');
+            if ($liste[0]->admin == 1) {
+                $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>
+                              <li><a href="AjouterChambre.php">Ajouter une chambre</a></li>';
+                $admin = true;
+            }
         }
     }
+} else {
+    $_SESSION["erreur"] = 7;
 }
 
-
-
-if ($idClient){
-
-}
 echo '
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -35,7 +38,6 @@ echo '
     <title>Hotel Neptune</title>
     <link rel="stylesheet" href="../css/index.css">
     <link href="https://fonts.googleapis.com/css?family=Acme|Sniglet&display=swap" rel="stylesheet">
-    
     <!--
     font-family: "Sniglet", cursive; →Titre
     font-family: "Acme", sans-serif; →Texte
@@ -56,4 +58,7 @@ echo '
         '.$pageAdmin.'
         <li><a href="'.$lien.'">'.$Compte.'</a></li>
       </div>
-    ';?>
+    ';
+afficherErreur();
+?>
+

@@ -3,44 +3,39 @@ session_start();
 require '../Fonctions.php';
 
 $bdd = getDataBase();
-$insert = Array();
-$_SESSION["erreur"] = 0;
 $_SESSION['savePostRegister'] = $_POST;
-
-if (isset($_POST)){
-    /*
-    //Vérification de la complétion du formulaire :
-    $listeElement = Array('nom','prenom','email','mdp','confirmMdp');
-    foreach ($listeElement as $item) {
-        if (!isset($_POST[$item])){
-            $_SESSION["erreur"] = 6;
+if (isset($bdd)){
+    $insert = Array();
+    $_SESSION["erreur"] = 0;
+    //Partie vérification qu'il n'y est pas d'erreur dans l'enregistrement
+    if (isset($_POST)){
+        //Pas besoin de vérifier que le formulaire est plein -> déjà gérer par l'html
+        //Vérification mdp
+        if ($_POST['mdp'] == $_POST['confirmMdp']) {
+            //Vérification email unique
+            $emails = getListe($bdd,'membres',Array('email' => $_POST['email']),Array(),'email');
+            if (!empty($emails)) {
+                $_SESSION["erreur"] = 5;
+            }
+        } else {
+            $_SESSION["erreur"] = 2;
         }
     }
-    */
-    //Vérification mdp
-    if ($_POST['mdp'] == $_POST['confirmMdp']) {
-        //Vérification email unique
-        $emails = getListe($bdd,'membres',Array('email' => $_POST['email']),'email');
-        if (!empty($emails)) {
-            $_SESSION["erreur"] = 5;
-        }
+    if ($_SESSION["erreur"] == 0) {
+        //Cryptage mdp :
+        $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
+        unset($_POST['confirmMdp']);
+        insertListe($bdd,'membres',$_POST);
+        unset($_SESSION['savePostRegister']);
+        $listeNewMembre = getListe($bdd,'membres',Array("email" => $_POST['email']),Array(),'id');
+        $listeNewMembre = $listeNewMembre[0];
+        $_SESSION['idClient'] = $listeNewMembre->id;
+        header('Location: ../MonCompte.php');
     } else {
-        $_SESSION["erreur"] = 2;
+        header('Location: ../LoginRegister.php');
     }
-}
-if ($_SESSION["erreur"] == 0) {
-    //Cryptage mdp :
-    $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
-    //Génération membre :
-    unset($_POST['confirmMdp']);
-    //var_dump($_POST);
-    insertListe($bdd,'membres',$_POST);
-    unset($_SESSION['savePostRegister']);
-    $liste = getListe($bdd,'membres',Array("email" => $listPost['email']),'id');
-    $_SESSION["idClient"] = $liste[0]->id;
-    var_dump($liste[0]->id);
-    header('Location: ../index.php');
 } else {
+    $_SESSION["erreur"] = 7;
     header('Location: ../LoginRegister.php');
 }
 

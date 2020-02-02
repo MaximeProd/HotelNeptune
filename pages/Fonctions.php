@@ -9,9 +9,10 @@
 //Récupérer entre parenthèse
 //https://www.developpez.net/forums/d1469403/php/langage/recuperer-chaine-entre-parentheses/
 //https://www.developpez.net/forums/d812317/bases-donnees/oracle/outils/sql-plus/connaitre-type-champs-d-table/
+/*
 function getDataBase() {
     try {
-        $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206',
+        $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206;',
             'maxime.bourrier', 'password', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     } catch (Exception $exception) {
@@ -19,31 +20,52 @@ function getDataBase() {
     }
     return $bdd;
 }
+*/
 
-function getListe(PDO $bdd,$fromTable,Array $args = [],$askSelect = '*', $search = False) {
+function getDataBase() {
+    try {
+        $bdd = new PDO('mysql:host=localhost;dbname=bddneptune;charset=utf8',
+            'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+    } catch (Exception $exception) {
+        $bdd = null;
+    }
+    return $bdd;
+}
+
+
+function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*') { //Cond pour Condition
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
     //Le(s) table au quel on veux accéder
     //Une liste des condtions à récupérer tel que :
     // array(arg1 => value1, arg2 => value 2, etc)
+    //Il est possible de demander les conditions avec like aussi
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
     $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
-    foreach ($args as $key => $arg) {
+    foreach ($cond as $key => $arg) {
+        $query = "{$query} AND {$key} LIKE :p_{$key} ";
+    }
+    foreach ($condLike as $key => $arg) {
         $query = "{$query} AND {$key} LIKE :p_{$key} ";
     }
 
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
-    foreach ($args as $key => $arg) {
-        if ($search) {
-            $arg = $arg . '%';
-        }
+
+    foreach ($cond as $key => $arg) {
+        $para = ':p_'.$key;
+        $statement->bindValue($para, $arg);
+    }
+    foreach ($condLike as $key => $arg) {
+        $arg = $arg . '%';
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
     }
 
+    //var_dump($statement);
     //On réalise la requète et on renvoie le résultat
     $liste = null;
     if ($statement->execute()) {
@@ -63,7 +85,7 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     //Avec un exemple :
     // array( 'idClient' => 15, 'prenom' => 'Maxime')
     //ET AUSSI il faut donner l'id de l'éllement à modife
-    var_dump($idModif);
+    //var_dump($idModif);
     $query = "UPDATE {$fromTable} SET id={$idModif} ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
@@ -77,7 +99,7 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
     }
-    var_dump($statement);
+    //var_dump($statement);
     //On réalise l'update
     $statement->execute();
     $statement->closeCursor();
@@ -107,7 +129,7 @@ function insertListe(PDO $bdd,$toTable,Array $args) {
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
     }
-    var_dump($statement);
+    //var_dump($statement);
     //On réalise l'insertion
     $statement->execute();
     $statement->closeCursor();
@@ -141,6 +163,35 @@ function getPost($askGet){
         return htmlspecialchars($_POST[$askGet]);
     } else {
         return '';
+    }
+}
+
+function afficherErreur($erreur = null){
+    if (isset($_SESSION["erreur"])){
+        $valueErreur = $_SESSION["erreur"];
+        if ($valueErreur  == 1){
+            $erreur = 'Veuillez contacter l\'administrateur dès les plus bref délai!!';
+        } elseif ($valueErreur  == 2) {
+            $erreur = 'Mot de passe ou email incorrect';
+        } elseif ($valueErreur  == 3) {
+            $erreur = 'Email incorrect';
+        } elseif ($valueErreur  == 4) {
+            $erreur = 'Les mots de passe ne corresponde pas';
+        } elseif ($valueErreur  == 5) {
+            $erreur = 'Email déjà utilisé';
+        } elseif ($valueErreur  == 6) {
+        $erreur = 'Champ obligatoire incomplet';
+        } elseif ($valueErreur  == 7) {
+            $erreur = 'Serveur introuvable!';
+        }
+        unset($_SESSION["erreur"]);
+    }
+    if (isset($erreur)){
+        echo '
+          <div class="erreur">
+            <p>' . $erreur . '</p>
+          </div>
+          ';
     }
 }
 
@@ -208,3 +259,14 @@ $test2 = $select->getAttribute('email');
 var_dump($test);
 var_dump($test2);
 */
+
+/* Projet arrêter : objectif automatisé la génration des inputs
+//On récupe les caractéristique des colonnes
+$select = $bdd->query('DESCRIBE membres');
+$columns = $select->fetchAll();
+//On en extrait les valeur utilies pour leurs complétion tel que la taille max ou leur nom
+foreach ($columns as $column) {
+    $sizeColumn[$column["Field"]] = extractFromParenthese($column["Type"]);
+}
+*/
+

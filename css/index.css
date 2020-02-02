@@ -26,6 +26,9 @@ header img{
 }
 
 .haut{
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -42,6 +45,8 @@ h2{
 }
 
 .liste{
+  z-index: 10;
+  overflow: hidden;
   position: sticky;
   top:0;
   background: linear-gradient(to right,#2C0238, #7D488C);
@@ -73,11 +78,10 @@ h2{
 }
 
 /*FOOTER*/
-body{
-
-}
 
 footer {
+  position:relative;
+  bottom: 0;
   width: 100%;
   background-color: #4C0099;
 }
@@ -113,4 +117,27 @@ footer {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+
+.erreur{
+  z-index: -1;
+  border-radius: 0 0 1.5vw 1.5vw;
+  padding-left: 2vw;
+  display: flex;
+  align-items: center;
+  animation : open;
+  animation-duration: 1.2s;
+  color: white;
+  background-color: red;
+  font-size: 2.5vw;
+  font-family: 'Acme', sans-serif;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+
+@keyframes open {
+  to {transform: translateY(0);}
+  from {transform: translateY(-100%)}
 }
