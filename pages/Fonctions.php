@@ -21,8 +21,8 @@ function getDataBase() {
     return $bdd;
 }
 
-
-/*function getDataBase() {
+/*
+function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=bddneptune;charset=utf8',
             'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -31,8 +31,8 @@ function getDataBase() {
         $bdd = null;
     }
     return $bdd;
-}*/
-
+}
+*/
 
 function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*') { //Cond pour Condition
     //Pour utiliser cette fonction il faut lui envoyer :
@@ -176,7 +176,7 @@ function afficherErreur($erreur = null){
         } elseif ($valueErreur  == 3) {
             $erreur = 'Email incorrect';
         } elseif ($valueErreur  == 4) {
-            $erreur = 'Les mots de passe ne correspondent pas';
+            $erreur = 'Les mots de passe ne corresponde pas';
         } elseif ($valueErreur  == 5) {
             $erreur = 'Email déjà utilisé';
         } elseif ($valueErreur  == 6) {
