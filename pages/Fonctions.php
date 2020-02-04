@@ -83,7 +83,7 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     //Une liste des modifs à faire :
     // array(arg1 => modif1, arg2 => modif2, etc)
     //Avec un exemple :
-    // array( 'idClient' => 15, 'prenom' => 'Maxime')
+    // array( 'nom' => Bourrier, 'prenom' => 'Maxime')
     //ET AUSSI il faut donner l'id de l'éllement à modife
     //var_dump($idModif);
     $query = "UPDATE {$fromTable} SET id={$idModif} ";
@@ -94,6 +94,7 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     $query = "{$query} WHERE id = {$idModif}";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
+    var_dump($query);
     //$statement->bindValue(':p_id', $idModif);
     foreach ($args as $key => $arg) {
         $para = ':p_'.$key;
