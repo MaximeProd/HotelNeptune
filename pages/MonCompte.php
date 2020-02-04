@@ -36,15 +36,16 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
                 <label for="newMdp">Nouveau mot de passe</label>
                 <input type="password" name="newMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="6">
                 <label for="confMdp">Comfirmer mot de passe</label>
-                <input type="text" name="confMdp" placeholder="Comfirmer mot de passe"       maxlength="16"     minlength="6">
+                <input type="password" name="confMdp" placeholder="Comfirmer mot de passe"       maxlength="16"     minlength="6">
                 <input id="Mdp" type="submit" name="confirmMdp" value="Modifier mot de passe">
               </form>
             </div>
             <div class="formulaire">
               <h4>Supprimer son compte</h4>
               <hr>
-              <form class="" action="index.html" method="post">
-                <label for="Mot de passe">Mot de passe</label><input type="text" name="Mot de passe" value="" placeholder="Mot de passe">
+              <form class="" action="loginRegister/RemoveCompte.php" method="post">
+                <label for="Mot de passe">Mot de passe</label>
+                <input type="password" name="mdp" value="" placeholder="Mot de passe">
                 <input id="Supr" type="submit" name="" value="Supprimer">
               </form>
               <form class="Register" action="loginRegister/Logout.php" method="post">

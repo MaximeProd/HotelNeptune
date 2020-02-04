@@ -55,7 +55,7 @@ if (isset($bdd)){
         </table>';
 
     } else {
-    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connection < </a>');
+    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>');
     }
 }
 
