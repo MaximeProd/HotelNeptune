@@ -43,10 +43,9 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
             <div class="formulaire">
               <h4>Supprimer son compte</h4>
               <hr>
-              <form class="" action="loginRegister/Remove.php" method="post">
+              <form class="" action="index.html" method="post">
                 <label for="Mot de passe">Mot de passe</label><input type="text" name="Mot de passe" value="" placeholder="Mot de passe">
                 <input id="Supr" type="submit" name="" value="Supprimer">
-                <input type="hidden" name="id" value="'.$idClient.'">
               </form>
               <form class="Register" action="loginRegister/Logout.php" method="post">
                 <input id="Deco" type="submit" name="" value="Se déconnecter">
