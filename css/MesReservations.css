@@ -1,0 +1,58 @@
+
+.case{
+
+    background: grey;
+    margin: 10px;
+    border: transparent solid ;
+    border-radius: 10px ;
+    box-shadow: 15px 10px 15px black;
+    height: fill;
+    padding:5px;
+    max-width: 80%;
+    width :100%;
+    overflow: hidden;
+}
+.chambre{
+
+  display: flex;
+  flex-direction: column;
+}
+.description{
+  width: 100%;
+}
+.division {
+  width: 100%;
+}
+.division textarea{
+  border: solid grey 3px;
+  padding: 10px;
+  font-family: 'Acme', sans-serif;
+  font-size: 2.5vw;
+  color: white;
+  resize: none;
+  background-color: transparent;
+}
+
+.reservation form{
+  font-size: 2.5vw;
+  display: flex;
+  flex-direction: column;
+}
+.reservation{
+  padding: 10px;
+}
+.reservation input{
+
+  padding: 5px;
+  width: 15vw;
+  margin-bottom: 2vw;
+
+}
+.fake{
+  display: flex;
+  flex-direction: column;
+}
+.option {
+  display: flex;
+  justify-content: space-between;
+}

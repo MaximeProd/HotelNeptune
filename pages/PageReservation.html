@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Hotel Neptune</title>
+    <link rel="stylesheet" href="../css/LoginRegister.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/MesReservations.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Sniglet&display=swap" rel="stylesheet">
+    <!--
+    font-family: 'Sniglet', cursive; →Titre
+    font-family: 'Acme', sans-serif; →Texte
+  -->
+  </head>
+  <body>
+    <header>
+      <div class="haut">
+        <img src="images/neptune.png">
+        <h1>Hotel Neptune</h1>
+      </div>
+    </header>
+    <main>
+      <div class="liste">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Mes réservtion</a></li>
+        <li><a href="#">Se connecter/Inscription</a></li>
+      </div>
+      <div class="fake">
+        <div class="case description">
+          <img src="../../HotelNeptune5Ok/HotelNeptune/pages/images/neptune.png">
+          <div class="division">
+              <h2>Chambre num</h2>
+              <textarea name="name" rows="3" cols="65" readonly>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+          </div>
+        </div>
+
+        <div class="case reservation">
+          <div class="detail">
+            <table>
+              <tbody>
+                <td>Numero :</td>
+                <td></td>
+              </tbody>
+              <tbody>
+                <td>Numero :</td>
+                <td></td>
+              </tbody>
+              <tbody>
+                <td>Numero :</td>
+                <td></td>
+              </tbody>
+              <tbody>
+                <td>Numero :</td>
+                <td></td>
+              </tbody>
+
+            </table>
+
+
+          </div>
+          <form class="" action="index.html" method="post">
+            <input type="hidden" name="" value="">
+            <label for="start">Date début séjour :</label>
+            <input type="date" name="start" value="" min="2020-02-02" max="2021-02-02" >
+            <label for="end">Date fin séjour :</label>
+            <input type="date" name="end" value="" min="2020-02-02" max="2021-02-02" >
+            <form action="Annuler.php" method="POST">
+            <input type="hidden" name="numChambre" value="' . $chambre->numero . '">
+            <div class="option">
+              <input type="submit" value="Réserver"/>
+              <div class="">
+                <p>Annuler</p>
+              </div>
+            </div>
+
+            </form>
+          </form>
+        </div>
+      </div>
