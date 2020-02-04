@@ -1,18 +1,41 @@
 <?php
+session_start();
 require '../Fonctions.php';
-$username = getPost('username');
-$mdp = getPost('mdp');
-$bdd = getDataBase();
-$personnes = getListe($bdd,'membres');
-foreach ($personnes as $personne){
-    $id = $personne-> id;
-    $email = mb_strtolower($personne-> prenom) .'-'. strtolower($personne-> nom) .'-'. $personne-> id.'@fakemail.fr';
-    $query = "update membres set email='{$email}' where id=".$id;
-    var_dump($query);
-    /*
-    $statement = $bdd->prepare($query);
-    $statement->execute();
-    $statement->closeCursor();
 
-    */
+$bdd = getDataBase();
+$_SESSION['savePostRegister'] = $_POST;
+if (isset($bdd)){
+    $insert = Array();
+    $_SESSION["erreur"] = 0;
+    //Partie vérification qu'il n'y est pas d'erreur dans l'enregistrement
+    if (isset($_POST)){
+        //Pas besoin de vérifier que le formulaire est plein -> déjà gérer par l'html
+        //Vérification mdp
+        if ($_POST['mdp'] == $_POST['confirmMdp']) {
+            //Vérification email unique
+            $emails = getListe($bdd,'membres',Array('email' => $_POST['email']),Array(),'email');
+            if (!empty($emails)) {
+                $_SESSION["erreur"] = 5;
+            }
+        } else {
+            $_SESSION["erreur"] = 2;
+        }
+    }
+    if ($_SESSION["erreur"] == 0) {
+        //Cryptage mdp :
+        $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
+        unset($_POST['confirmMdp']);
+        insertListe($bdd,'membres',$_POST);
+        unset($_SESSION['savePostRegister']);
+        $listeNewMembre = getListe($bdd,'membres',Array("email" => $_POST['email']),Array(),'id');
+        $listeNewMembre = $listeNewMembre[0];
+        $_SESSION['idClient'] = $listeNewMembre->id;
+        header('Location: ../MonCompte.php');
+    } else {
+        header('Location: ../LoginRegister.php');
+    }
+} else {
+    $_SESSION["erreur"] = 7;
+    header('Location: ../LoginRegister.php');
 }
+

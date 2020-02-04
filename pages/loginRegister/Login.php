@@ -2,23 +2,40 @@
 session_start();
 require '../Fonctions.php';
 
+$bdd = getDatabase();
 $listPost = $_POST;
-//var_dump($listPost);
-if (isset($listPost['mdp']) AND isset($listPost['email'])){
-    $bdd = getDatabase();
-    $liste = getListe($bdd,'membres',$listPost);
-    //var_dump($liste[0]->id);
-    if(!empty($liste)){
-        if(count($liste)==1){
-            $idClient = $liste[0]->id;
-            $_SESSION['idClient'] = $idClient;
-            header('Location: ../index.php');
+$_SESSION['savePostLogin'] = $_POST;
+
+if(isset($bdd)){
+    $_SESSION["erreur"] = 0;
+    if (isset($listPost['mdp']) AND isset($listPost['email'])){
+        $password = htmlspecialchars($_POST['mdp']);
+        $liste = getListe($bdd,'membres',Array("email" => $listPost['email']),Array(),'mdp,id');
+        if(!empty($liste)){
+            if(count($liste)==1 && password_verify($password,$liste[0]->mdp)){
+                $idClient = $liste[0]->id;
+                $_SESSION['idClient'] = $idClient;
+                unset($_SESSION['savePostLogin']);
+            } elseif (count($liste) > 1){
+                $_SESSION['idClient'] = $idClient;
+                //Erreur : Il existe plusieur client avec la même adresse mail!! Grosse erreur d'identification!
+                $_SESSION["erreur"] = 1;
+            } else {
+                //Erreur fréquente : le mot de passe ou l'email ne correspond pas
+                $_SESSION["erreur"] = 2;
+            }
         } else {
-            header('Location: ../LoginRegister.php?FatalError=True');
+            //Erreur aussi fréquente : L'email n'est pas reconnu
+            $_SESSION["erreur"] = 3;
         }
-    } else {
-        header('Location: ../LoginRegister.php?error=True');
     }
+} else {
+    $_SESSION["erreur"] = 7;
+}
+if (isset($_SESSION['idClient'])){
+    header('Location: ../MonCompte.php');
+} else {
+    header('Location: ../LoginRegister.php');
 }
 
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'Fonctions.php';
 $idClient = null;
 $Compte = 'Se connecter/Inscription';
 $lien = "LoginRegister.php";
@@ -8,22 +9,27 @@ if (isset($_SESSION['idClient'])){
     $Compte = 'Mon Compte';
     $lien = "MonCompte.php";
 }
+var_dump($idClient);
 
-$_SESSION['admin'] = False;
-$admin = null;
-$pageAdmin = '';
-if (isset($_SESSION['admin'])){
-    $admin = $_SESSION['admin'];
-    if ($admin == 1){
-    $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>';
+$bdd = getDataBase();
+$pageAdmin = null;
+$admin = false;
+if (isset($bdd)){
+    $pageAdmin = '';
+    if (!empty($bdd)) {
+        if (isset($_SESSION['idClient'])) {
+            $liste = getListe($bdd, 'membres', Array('id' => $idClient),Array(), 'admin');
+            if ($liste[0]->admin == 1) {
+                $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>
+                              <li><a href="AjouterChambre.php">Ajouter une chambre</a></li>';
+                $admin = true;
+            }
+        }
     }
+} else {
+    $_SESSION["erreur"] = 7;
 }
 
-
-
-if ($idClient){
-
-}
 echo '
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -44,19 +50,7 @@ echo '
         <h1>Hotel Neptune</h1>
       </div>
     </header>
-    <footer>
-      <div class="footer">
-        <a href="#">Qui somme-nous? </a>
-        <a href="#">Tarif </a>
-        <a href="#">Mention légale </a>
-        <a href="#">Asssistance </a>
-        <a href="#">Fonctionnement Du Site </a>
-        <a href="#">Aide </a>
-      </div>
-      <div class="Copyright">
-        <p>© Copyright 2020</p>
-      </div>
-    </footer>
+
     <main>
       <div class="liste">
         <li><a href="index.php">Accueil</a></li>
@@ -64,4 +58,7 @@ echo '
         '.$pageAdmin.'
         <li><a href="'.$lien.'">'.$Compte.'</a></li>
       </div>
-    ';?>
+    ';
+afficherErreur();
+?>
+
