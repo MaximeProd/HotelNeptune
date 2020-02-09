@@ -9,7 +9,7 @@
 //Récupérer entre parenthèse
 //https://www.developpez.net/forums/d1469403/php/langage/recuperer-chaine-entre-parentheses/
 //https://www.developpez.net/forums/d812317/bases-donnees/oracle/outils/sql-plus/connaitre-type-champs-d-table/
-
+/*
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206;',
@@ -21,7 +21,7 @@ function getDataBase() {
     return $bdd;
 }
 
-/*
+*/
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=bddneptune;charset=utf8',
@@ -32,9 +32,9 @@ function getDataBase() {
     }
     return $bdd;
 }
-*/
 
-function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*') { //Cond pour Condition
+
+function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*',$specialCond= "") { //Cond pour Condition
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
     //Le(s) table au quel on veux accéder
@@ -46,15 +46,16 @@ function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$ask
     $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($cond as $key => $arg) {
-        $query = "{$query} AND {$key} LIKE :p_{$key} ";
+        $query = "{$query} AND {$key} = :p_{$key} ";
     }
-    foreach ($condLike as $key => $arg) {
-        $query = "{$query} AND {$key} LIKE :p_{$key} ";
+    foreach ($condLike as $key2 => $arg2) {
+        $query = "{$query} AND {$key2} LIKE :p_{$key2} ";
     }
-
+    if (!empty($specialCond)){
+        $query = "{$query} AND {$specialCond}";
+    }
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
-
     foreach ($cond as $key => $arg) {
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
@@ -64,7 +65,6 @@ function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$ask
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
     }
-
     //var_dump($statement);
     //On réalise la requète et on renvoie le résultat
     $liste = null;
@@ -94,7 +94,6 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     $query = "{$query} WHERE id = {$idModif}";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
-    var_dump($query);
     //$statement->bindValue(':p_id', $idModif);
     foreach ($args as $key => $arg) {
         $para = ':p_'.$key;
@@ -196,6 +195,21 @@ function afficherErreur($erreur = null){
     }
 }
 
+function generateSearch(Array $listePOST = [], Array $askSearch = []){
+    $search = Array();
+    if (isset($listePOST)){
+        $listeElement = $askSearch;
+        foreach ($listeElement as $item) {
+            if (isset($listePOST[$item])){
+                $search += [$item => $listePOST[$item]];
+            }   else {
+                $search += [$item => ""];
+            }
+        }
+    }
+    return $search;
+}
+
 /*
 function displayChambre($chambres)
 {
@@ -242,7 +256,7 @@ foreach ($personnes as $personne){
 //Fonction pour encrypter un mot de passe
 var_dump($_POST);
 $bdd = getDataBase();
-$cryptPassword = password_hash('espagne34',PASSWORD_DEFAULT);
+$cryptPassword = password_hash('motdepasse',PASSWORD_DEFAULT);
 updateListe($bdd,'membres',Array('mdp'=>$cryptPassword),161);
 */
 
@@ -271,3 +285,15 @@ foreach ($columns as $column) {
 }
 */
 
+/* RENAME CHAMBRE
+$personnes = getListe($bdd,"chambres");
+foreach ($personnes as $personne){
+    $id = $personne-> numero;
+    $nomchambre = "'Chambre ".$id."'";
+    $query = "update chambres set nomChambre={$nomchambre} where numero={$id}";
+    var_dump($query);
+    $statement = $bdd->prepare($query);
+    $statement->execute();
+    $statement->closeCursor();
+}
+*/

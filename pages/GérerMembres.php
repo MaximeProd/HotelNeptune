@@ -3,18 +3,9 @@ require 'paterns/Head.php';
 
 if ($admin){
 //On précomplète les clées de la liste assiociative qui sert à autocompléter les champs de la page
-$search = Array();
-if (isset($_POST)){
-    $listeElement = Array('id','nom','prenom','email');
-    foreach ($listeElement as $item) {
-        if (isset($_POST[$item])){
-            $search += [$item => $_POST[$item]];
-        }   else {
-            $search += [$item => ""];
-        }
-    }
-}
 
+
+$search = generateSearch($_POST, Array('id','nom','prenom','email'));
 if (isset($bdd)){
     $membres = getListe($bdd,'membres',Array(),$search,'*');
     echo  ' 
