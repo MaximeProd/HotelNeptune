@@ -122,7 +122,11 @@ function insertListe(PDO $bdd,$toTable,Array $args) {
         $tableValues = "{$tableValues},{$key}";
         $values = "{$values},:p_{$key}";
     }
-    $query = "INSERT INTO {$toTable}(id{$tableValues}) VALUES (null{$values}) ";
+    //On supprime la première virgule parasite
+    $tableValues = substr($tableValues, 1);
+    $values = substr($values, 1);
+    //On construit le query
+    $query = "INSERT INTO {$toTable}({$tableValues}) VALUES ({$values}) ";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
     foreach ($args as $key => $arg) {
@@ -187,6 +191,10 @@ function afficherErreur($erreur = null){
             $erreur = 'Veuillez saisir des jours consécutifs';
         } elseif ($valueErreur  == 9) {
             $erreur = 'Aucun jour sélectionné';
+        } elseif ($valueErreur  == 10) {
+            $erreur = 'Chambre déjà réservée';
+        } elseif ($valueErreur  == 11) {
+            $erreur = 'Chambre réservé avec succé';
         }
         unset($_SESSION["erreur"]);
     }

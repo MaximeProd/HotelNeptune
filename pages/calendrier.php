@@ -1,7 +1,7 @@
 <?php
 require 'paterns/Head.php';
 
-echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
+
 
 /***************************************
  *
@@ -21,31 +21,14 @@ function calendar ($bdd,$m, $y)
     $mois = array('','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
     $week = array('lu','ma','me','je','ve','sa','di');
 
-
     $t = mktime(12, 0, 0, $m, 1, $y); // Timestamp du premier jour du mois
-    for ($l = 0 ; $l < 6 ; $l++) // calendrier sur 6 lignes
-    {
-        for ($i = 0; $i < 7; $i++) // 7 jours de la semaine
-        {
-            $w = $sem[(int)date('w', $t)]; // Jour de la semaine à traiter
-            $m2 = (int)date('n', $t); // Tant que le mois reste celui du départ
-
-            $demain = date('Y-m-d', strtotime(date('Y-m-d') . ' +1 days'));
-            if (($w == $i) && ($m2 == $m)) // Si le jours de semaine et le mois correspondent
-            {
-
-                $t += 86400; // Passe au jour suivant
-            }
-        }
-    }
-    $t = mktime(12, 0, 0, $m, 1, $y); // Timestamp du premier jour du mois
-    echo '
-
-<table><tbody>';
+    $today = mktime(12, 0, 0, date('m'), date('d'), date('Y'))+86400;
+    echo '<table><tbody>';
 
 // Le mois
 //--------
-    echo '<tr><td colspan="7">'.$mois[$m].'</td></tr>';
+    echo '<tr><td colspan="7">'.$y.'</td></tr>
+            <tr><td colspan="7">'.$mois[$m].'</td></tr>';
 
 // Les jours de la semaine
 //------------------------
@@ -72,15 +55,25 @@ function calendar ($bdd,$m, $y)
                 $date= $y.'-'.date('m',$t).'-'.date('d',$t);
                 $listeReserv = getListe($bdd,"planning",Array("chambre_id"=>1,"jour"=>$date));
                 $id = 'toggle'.$t.'';
+                $color = "";
+                $lock ="open";
+                $locked = "";
                 if (!empty($listeReserv)){
-                    $id = '"lock"';
-                    var_dump($id);
+                    $color = "red";
+                    $lock = "lock";
+                    $locked = 'disabled="disabled"';
                 }
+                if ($today > $t){
+                    $color = "blue";
+                    $lock = "lock";
+                    $locked = 'disabled="disabled"';
+                }
+
                 $var = date('j',$t);
                 echo '   
-                <td>
-                  <input class="checkboxCalendrier" id="'.$id.'" type="checkbox" name="'.$t.'">
-                  <label for="toggle'.$t.'">'.$var.'</label>
+                <td class="'.$color.'">
+                  <input class="checkboxCalendrier" id="toggle'.$t.'" type="checkbox" name="'.$t.'" '.$locked.'>
+                  <label class="case '.$lock.'" for="'.$id.'">'.$var.'</label>
                 </td>
                 '  ;// Affiche le jour du mois
 
@@ -96,11 +89,40 @@ function calendar ($bdd,$m, $y)
     echo '</tbody></table>';
 
 }
-echo '<form class="" action="loginRegister/ValideReservation.php" method="post">';
 
-calendar($bdd,01,2020);
+$m = date('Y-n');
+if (isset($_POST["mois"])){
+    $m = $_POST["mois"];
+}
+$mParse = date_parse($m);
 
+$mMoins = date('Y-n',(strtotime($m.'- 1 months')));
+
+$mPlus = date('Y-n',(strtotime($m.'+ 1 months')));
+$mPlusParse = date_parse($mPlus);
+
+$mPlusPlus = date('Y-n',(strtotime($m.'+ 2 months')));
+$mPlusPlusParse = date_parse($mPlusPlus);
+
+var_dump($_POST);
+echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
 echo '
+<div class="calendriers">
+<form class="select" method="post">
+  <input type="hidden" name="mois" value="'.$mMoins.'">
+  <input type="submit" name="" value="Moins">
+</form>
+<form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
+<input type="hidden" name="chambre_id" value="1">
+      ';
+        calendar($bdd,$mParse["month"],$mParse["year"]);
+        calendar($bdd,$mPlusParse["month"],$mPlusParse["year"]);
+        calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"]);
+echo '  
 <input type="submit" name="" value="Valider">
+</form>
+<form class="select" method="post">
+  <input type="hidden" name="mois" value="'.$mPlus.'">
+  <input type="submit" name="" value="Plus">
 </form>';
 ?>

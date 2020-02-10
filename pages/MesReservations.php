@@ -16,7 +16,7 @@ if (isset($bdd)){
             }
         }
         //Augmenter la fonction getliste en mettant une liste dans le search
-        $chambres = getListe($bdd,'planning',Array('client_id'=>$idClient,'chambre_id'=>$search['chambre_id']),Array('jour'=>$search['jour']),'*');
+        $chambres = getListe($bdd,'planning',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*');
         echo  '   
            <link rel="stylesheet" href="../css/GérerMembres.css">
            <table>
