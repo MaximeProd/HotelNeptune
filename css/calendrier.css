@@ -10,7 +10,7 @@ body {
 }
 
 
-input {
+.checkboxCalendrier {
 display: none;
 }
 td{
@@ -24,21 +24,21 @@ label {
   color: #fff;
   cursor: pointer;
   user-select: none;
-  transition: background-color .2s;
+  transition: background-color 0s;
 }
 
 label::before {
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
 
-label:hover, input:focus + label {
+label:hover, .checkboxCalendrier:focus + label {
   background-color: #96ffb1;
 }
 
-input:checked + label {
+.checkboxCalendrier:checked + label {
   background-color: green;
 }
 
-input:checked + label::before {
+.checkboxCalendrier:checked + label::before {
   background-color: #fff;
 }

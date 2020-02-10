@@ -66,7 +66,7 @@ function calendar ($bdd,$m, $y)
             $w = $sem[(int)date('w',$t)]; // Jour de la semaine à traiter
             $m2 = (int)date('n',$t); // Tant que le mois reste celui du départ
 
-            $demain = date('Y-m-d', strtotime(date('Y-m-d').' +1 days'));
+            //$demain = date('Y-m-d', strtotime(date($date).' +1 days'));
             if (($w == $i) && ($m2 == $m)) // Si le jours de semaine et le mois correspondent
             {
                 $date= $y.'-'.date('m',$t).'-'.date('d',$t);
@@ -79,7 +79,7 @@ function calendar ($bdd,$m, $y)
                 $var = date('j',$t);
                 echo '   
                 <td>
-                  <input id="'.$id.'" type="checkbox">
+                  <input class="checkboxCalendrier" id="'.$id.'" type="checkbox" name="'.$t.'">
                   <label for="toggle'.$t.'">'.$var.'</label>
                 </td>
                 '  ;// Affiche le jour du mois
@@ -96,6 +96,11 @@ function calendar ($bdd,$m, $y)
     echo '</tbody></table>';
 
 }
+echo '<form class="" action="loginRegister/ValideReservation.php" method="post">';
 
-calendar($bdd,01,2020)
+calendar($bdd,01,2020);
+
+echo '
+<input type="submit" name="" value="Valider">
+</form>';
 ?>

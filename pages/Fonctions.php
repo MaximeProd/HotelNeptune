@@ -183,6 +183,10 @@ function afficherErreur($erreur = null){
         $erreur = 'Champ obligatoire incomplet';
         } elseif ($valueErreur  == 7) {
             $erreur = 'Serveur introuvable!';
+        } elseif ($valueErreur  == 8) {
+            $erreur = 'Veuillez saisir des jours consécutifs';
+        } elseif ($valueErreur  == 9) {
+            $erreur = 'Aucun jour sélectionné';
         }
         unset($_SESSION["erreur"]);
     }
