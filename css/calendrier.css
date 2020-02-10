@@ -1,18 +1,44 @@
-#open{
-  background-color: white;
-    color: black;
-}
-td input{
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 
-}
-p{
-    color: red;
-}
-#lock{
-    background-color: red;
-    color: white;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.test:checked ~ * #open {
+
+body {
+
+}
+
+
+input {
+display: none;
+}
+td{
+  background-color: #6a8494;
+}
+#lock {}
+label {
+  display: block;
+  padding: 1vw;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .2s;
+}
+
+label::before {
+  transition: background-color .2s;
+}
+
+label:hover, input:focus + label {
+  background-color: #96ffb1;
+}
+
+input:checked + label {
   background-color: green;
+}
+
+input:checked + label::before {
+  background-color: #fff;
 }
