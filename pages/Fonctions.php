@@ -171,6 +171,9 @@ function getPost($askGet){
 }
 
 function afficherErreur($erreur = null){
+    if (!empty($erreur)){
+        $_SESSION["erreur"]=$erreur;
+    }
     if (isset($_SESSION["erreur"])){
         $valueErreur = $_SESSION["erreur"];
         if ($valueErreur  == 1){
@@ -195,7 +198,13 @@ function afficherErreur($erreur = null){
             $erreur = 'Chambre déjà réservée';
         } elseif ($valueErreur  == 11) {
             $erreur = 'Chambre réservé avec succé';
+        } elseif ($valueErreur  == 12) {
+            $erreur = 'Vous ne pouvez pas réserver plus d\'une semaine une chambre';
+        } elseif ($valueErreur  == 13) {
+            $erreur = 'Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>';
         }
+
+
         unset($_SESSION["erreur"]);
     }
     if (isset($erreur)){
