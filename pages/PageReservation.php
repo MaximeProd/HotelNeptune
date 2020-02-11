@@ -74,7 +74,7 @@ if (isset($bdd)){
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
                             }
-                            if ($today > $t){
+                            if ($today > $t || $t > $today + 86400*365){
                                 $color = "blue";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
