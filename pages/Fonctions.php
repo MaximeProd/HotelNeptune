@@ -202,8 +202,9 @@ function afficherErreur($erreur = null){
             $erreur = 'Vous ne pouvez pas réserver plus d\'une semaine une chambre';
         } elseif ($valueErreur  == 13) {
             $erreur = 'Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>';
+        } else {
+            $erreur = $_SESSION["erreur"];
         }
-
 
         unset($_SESSION["erreur"]);
     }
