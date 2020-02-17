@@ -51,7 +51,7 @@ if (isset($bdd)) {
            <div class="chambre">
           <img src="images/chambre'.$chambre->numero.'_1.png">
           <div class="division">
-            <h2>Chambre ' . $chambre->numero . '</h2>
+            <h2>' . $chambre->nomChambre . '</h2>
             <p>Prix : ' . $chambre->prix . ' €</p>
             <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
             <p></p>
