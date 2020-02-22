@@ -13,7 +13,7 @@ if (isset($bdd) && isset($_SESSION["idClient"]) && isset($_POST["chambre_id"])) 
         if (count($_POST) > 0 && count($_POST) <= 7){
             foreach ($_POST as $aujour => $etat) {
                 $date = date('Y-m-d', $aujour);
-                $listeReserv = getListe($bdd, "planning", Array("chambre_id" => 1, "jour" => $date));
+                $listeReserv = getListe($bdd, "planning", Array("chambre_id" => $idChambre, "jour" => $date));
                 if ($aujour == $hier + 86400) {
                     $hier = $aujour;
                 } else {
