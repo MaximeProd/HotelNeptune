@@ -197,7 +197,7 @@ function afficherErreur($erreur = null){
         } elseif ($valueErreur  == 10) {
             $erreur = 'Chambre déjà réservée';
         } elseif ($valueErreur  == 11) {
-            $erreur = 'Chambre réservé avec succé';
+            $erreur = 'Chambre réservé avec succés';
         } elseif ($valueErreur  == 12) {
             $erreur = 'Vous ne pouvez pas réserver plus d\'une semaine une chambre';
         } elseif ($valueErreur  == 13) {

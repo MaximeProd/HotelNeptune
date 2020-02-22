@@ -32,6 +32,9 @@ td{
 .blue{
   background-color: blue;
 }
+.yellow{
+  background-color: #c9ab00;
+}
 
 .lock{
   display: block;

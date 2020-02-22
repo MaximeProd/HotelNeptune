@@ -25,7 +25,7 @@ if (isset($bdd)){
              * https://www.afjv.com/forums/sujet/5-266-1-fonction-php-pour-afficher-un-calendrier-en-html
              ****************************************/
 
-            function calendar ($bdd,$m, $y,$numChambre)
+            function calendar ($bdd,$m, $y,$numChambre,$idClient)
             {
                 $sem = array(6,0,1,2,3,4,5); // Correspondance des jours de la semaine : lundi = 0, dimanche = 6
 
@@ -65,17 +65,21 @@ if (isset($bdd)){
                         {
                             $date= $y.'-'.date('m',$t).'-'.date('d',$t);
                             $listeReserv = getListe($bdd,"planning",Array("chambre_id"=>$numChambre,"jour"=>$date));
+                            $listeReservClient = getListe($bdd,"planning",Array("client_id"=>$idClient,"jour"=>$date));
                             $id = 'toggle'.$t.'';
                             $color = "";
                             $lock ="open";
                             $locked = "";
-                            if (!empty($listeReserv)){
+                            if ($today > $t || $t > $today + 86400*365){
+                                $color = "blue";
+                                $lock = "lock";
+                                $locked = 'disabled="disabled"';
+                            } else if (!empty($listeReserv)){
                                 $color = "red";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
-                            }
-                            if ($today > $t || $t > $today + 86400*365){
-                                $color = "blue";
+                            } else if (!empty($listeReservClient)){
+                                $color = "yellow";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
                             }
@@ -126,9 +130,9 @@ if (isset($bdd)){
         <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
         <input type="hidden" name="chambre_id" value="'.$numChambre.'">
               ';
-            calendar($bdd,$mParse["month"],$mParse["year"],$numChambre);
-            calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre);
-            calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"],$numChambre);
+            calendar($bdd,$mParse["month"],$mParse["year"],$numChambre,$idClient);
+            calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre,$idClient);
+            calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"],$numChambre,$idClient);
             echo '  
         <input type="submit" name="" value="Valider">
         </form>
