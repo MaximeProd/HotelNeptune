@@ -18,7 +18,7 @@ if(isset($bdd)){
                 unset($_SESSION['savePostLogin']);
             } elseif (count($liste) > 1){
                 $_SESSION['idClient'] = $idClient;
-                //Erreur : Il existe plusieur client avec la même adresse mail!! Grosse erreur d'identification!
+                //Erreur : Il existe plusieurs client avec la même adresse mail!! Grosse erreur d'identification!
                 $_SESSION["erreur"] = 1;
             } else {
                 //Erreur fréquente : le mot de passe ou l'email ne correspond pas

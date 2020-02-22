@@ -34,7 +34,7 @@ function getDataBase() {
 }
 */
 
-function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*') { //Cond pour Condition
+function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*',$specialCond= "") { //Cond pour Condition
     //Pour utiliser cette fonction il faut lui envoyer :
     //La bdd
     //Le(s) table au quel on veux accéder
@@ -46,15 +46,16 @@ function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$ask
     $query = "SELECT {$askSelect} FROM {$fromTable} WHERE 1 ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($cond as $key => $arg) {
-        $query = "{$query} AND {$key} LIKE :p_{$key} ";
+        $query = "{$query} AND {$key} = :p_{$key} ";
     }
-    foreach ($condLike as $key => $arg) {
-        $query = "{$query} AND {$key} LIKE :p_{$key} ";
+    foreach ($condLike as $key2 => $arg2) {
+        $query = "{$query} AND {$key2} LIKE :p_{$key2} ";
     }
-
+    if (!empty($specialCond)){
+        $query = "{$query} AND {$specialCond}";
+    }
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
-
     foreach ($cond as $key => $arg) {
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
@@ -64,7 +65,6 @@ function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$ask
         $para = ':p_'.$key;
         $statement->bindValue($para, $arg);
     }
-
     //var_dump($statement);
     //On réalise la requète et on renvoie le résultat
     $liste = null;
@@ -83,7 +83,7 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     //Une liste des modifs à faire :
     // array(arg1 => modif1, arg2 => modif2, etc)
     //Avec un exemple :
-    // array( 'idClient' => 15, 'prenom' => 'Maxime')
+    // array( 'nom' => Bourrier, 'prenom' => 'Maxime')
     //ET AUSSI il faut donner l'id de l'éllement à modife
     //var_dump($idModif);
     $query = "UPDATE {$fromTable} SET id={$idModif} ";
@@ -122,7 +122,11 @@ function insertListe(PDO $bdd,$toTable,Array $args) {
         $tableValues = "{$tableValues},{$key}";
         $values = "{$values},:p_{$key}";
     }
-    $query = "INSERT INTO {$toTable}(id{$tableValues}) VALUES (null{$values}) ";
+    //On supprime la première virgule parasite
+    $tableValues = substr($tableValues, 1);
+    $values = substr($values, 1);
+    //On construit le query
+    $query = "INSERT INTO {$toTable}({$tableValues}) VALUES ({$values}) ";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
     foreach ($args as $key => $arg) {
@@ -167,6 +171,9 @@ function getPost($askGet){
 }
 
 function afficherErreur($erreur = null){
+    if (!empty($erreur)){
+        $_SESSION["erreur"]=$erreur;
+    }
     if (isset($_SESSION["erreur"])){
         $valueErreur = $_SESSION["erreur"];
         if ($valueErreur  == 1){
@@ -183,7 +190,22 @@ function afficherErreur($erreur = null){
         $erreur = 'Champ obligatoire incomplet';
         } elseif ($valueErreur  == 7) {
             $erreur = 'Serveur introuvable!';
+        } elseif ($valueErreur  == 8) {
+            $erreur = 'Veuillez saisir des jours consécutifs';
+        } elseif ($valueErreur  == 9) {
+            $erreur = 'Aucun jour sélectionné';
+        } elseif ($valueErreur  == 10) {
+            $erreur = 'Chambre déjà réservée';
+        } elseif ($valueErreur  == 11) {
+            $erreur = 'Chambre réservé avec succé';
+        } elseif ($valueErreur  == 12) {
+            $erreur = 'Vous ne pouvez pas réserver plus d\'une semaine une chambre';
+        } elseif ($valueErreur  == 13) {
+            $erreur = 'Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>';
+        } else {
+            $erreur = $_SESSION["erreur"];
         }
+
         unset($_SESSION["erreur"]);
     }
     if (isset($erreur)){
@@ -193,6 +215,21 @@ function afficherErreur($erreur = null){
           </div>
           ';
     }
+}
+
+function generateSearch(Array $listePOST = [], Array $askSearch = []){
+    $search = Array();
+    if (isset($listePOST)){
+        $listeElement = $askSearch;
+        foreach ($listeElement as $item) {
+            if (isset($listePOST[$item])){
+                $search += [$item => $listePOST[$item]];
+            }   else {
+                $search += [$item => ""];
+            }
+        }
+    }
+    return $search;
 }
 
 /*
@@ -241,7 +278,7 @@ foreach ($personnes as $personne){
 //Fonction pour encrypter un mot de passe
 var_dump($_POST);
 $bdd = getDataBase();
-$cryptPassword = password_hash('espagne34',PASSWORD_DEFAULT);
+$cryptPassword = password_hash('motdepasse',PASSWORD_DEFAULT);
 updateListe($bdd,'membres',Array('mdp'=>$cryptPassword),161);
 */
 
@@ -270,3 +307,15 @@ foreach ($columns as $column) {
 }
 */
 
+/* RENAME CHAMBRE
+$personnes = getListe($bdd,"chambres");
+foreach ($personnes as $personne){
+    $id = $personne-> numero;
+    $nomchambre = "'Chambre ".$id."'";
+    $query = "update chambres set nomChambre={$nomchambre} where numero={$id}";
+    var_dump($query);
+    $statement = $bdd->prepare($query);
+    $statement->execute();
+    $statement->closeCursor();
+}
+*/

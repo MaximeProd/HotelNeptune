@@ -21,7 +21,7 @@ if (isset($bdd)){
             $liste = getListe($bdd, 'membres', Array('id' => $idClient),Array(), 'admin');
             if ($liste[0]->admin == 1) {
                 $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>
-                              <li><a href="AjouterChambre.php">Ajouter une chambre</a></li>';
+                              <li><a href="GérerChambres.php">Gérer les chambres</a></li>';
                 $admin = true;
             }
         }

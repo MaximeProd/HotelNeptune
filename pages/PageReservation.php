@@ -2,59 +2,150 @@
 <?php
 require 'paterns/Head.php';
 
+if (empty($_POST)){
+    $_POST = $_SESSION["memoryPost"];
+} else {
+    $_SESSION["memoryPost"] = $_POST;
+}
 
-echo 'Bonsoir!';
+if (isset($bdd)){
+    if(isset($idClient)){
+        $numChambre = getPost('numChambre');
+        $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$numChambre),Array(),'*',"tarif_id=id");
+        if (!empty($chambres)) {
 
-$numChambre = getPost('numChambre');
+            /***************************************
+             *
+             * Affiche un calendrier mensuel
+             * sous forme d'un tableau
+             *
+             * $m = mois
+             * $y = année
+             *
+             * https://www.afjv.com/forums/sujet/5-266-1-fonction-php-pour-afficher-un-calendrier-en-html
+             ****************************************/
 
-var_dump($idClient);
-var_dump($numChambre);
-echo $idClient.'<br>';
-echo $numChambre;
+            function calendar ($bdd,$m, $y,$numChambre)
+            {
+                $sem = array(6,0,1,2,3,4,5); // Correspondance des jours de la semaine : lundi = 0, dimanche = 6
 
-$chambres = getListe($bdd,"chambres",Array("numero"=>$numChambre));
-$chambre = $chambres[0];
-if ($chambres) {
-    echo '
+                $mois = array('','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
+                $week = array('lu','ma','me','je','ve','sa','di');
 
-<html>
-<meta charset="utf-8">
-<title>Hotel Neptune</title>
-<link rel="stylesheet" href="../css/MesReservations.css">
-<link href="https://fonts.googleapis.com/css?family=Acme|Sniglet&display=swap" rel="stylesheet">
-<body>
+                $t = mktime(12, 0, 0, $m, 1, $y); // Timestamp du premier jour du mois
+                $today = mktime(12, 0, 0, date('m'), date('d'), date('Y'))+86400;
+                echo '<table><tbody>';
 
+        // Le mois
+        //--------
+                echo '<tr><td colspan="7">'.$y.'</td></tr>
+                    <tr><td colspan="7">'.$mois[$m].'</td></tr>';
 
-<div class="fake">
-    <div class="chambre">
-        <img src="../../HotelNeptune5Ok/HotelNeptune/pages/images/neptune.png">
-        <div class="division">
+        // Les jours de la semaine
+        //------------------------
+                echo '<tr>';
+                for ($i = 0 ; $i < 7 ; $i++)
+                {
+                    echo '<td>'.$week[$i].'</td>';
+                }
+                echo '</tr>';
 
-            <h2>Chambre num</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non </p>
+        // Le calendrier
+        //--------------
+                for ($l = 0 ; $l < 6 ; $l++) // calendrier sur 6 lignes
+                {
+                    echo '<tr>';
+                    for ($i = 0 ; $i < 7 ; $i++) // 7 jours de la semaine
+                    {
+                        $w = $sem[(int)date('w',$t)]; // Jour de la semaine à traiter
+                        $m2 = (int)date('n',$t); // Tant que le mois reste celui du départ
 
-            <div class="bouttonReservation">
-                <form action="PlusInfo.php" method="POST">
-                    <input type="hidden" name="numChambre" value="' . $chambre->numero . '">
-                    <input type="submit" value="Plus d\'info"/>
-                </form>
-                <form action="Annuler.php" method="POST">
-                    <input type="hidden" name="numChambre" value="' . $chambre->numero . '">
-                    <input type="submit" value="Annuler"/>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="chambre">
-        <h3>Date de Début : 01/10/2000</h3>
-        <h3>Date de Fin : 06/12/2001</h3>
-    </div>
-</div>
-';
+                        //$demain = date('Y-m-d', strtotime(date($date).' +1 days'));
+                        if (($w == $i) && ($m2 == $m)) // Si le jours de semaine et le mois correspondent
+                        {
+                            $date= $y.'-'.date('m',$t).'-'.date('d',$t);
+                            $listeReserv = getListe($bdd,"planning",Array("chambre_id"=>$numChambre,"jour"=>$date));
+                            $id = 'toggle'.$t.'';
+                            $color = "";
+                            $lock ="open";
+                            $locked = "";
+                            if (!empty($listeReserv)){
+                                $color = "red";
+                                $lock = "lock";
+                                $locked = 'disabled="disabled"';
+                            }
+                            if ($today > $t || $t > $today + 86400*365){
+                                $color = "blue";
+                                $lock = "lock";
+                                $locked = 'disabled="disabled"';
+                            }
+
+                            $var = date('j',$t);
+                            echo '   
+                        <td class="'.$color.'">
+                          <input class="checkboxCalendrier" id="toggle'.$t.'" type="checkbox" name="'.$t.'" '.$locked.'>
+                          <label class="case '.$lock.'" for="'.$id.'">'.$var.'</label>
+                        </td>
+                        '  ;// Affiche le jour du mois
+
+                            $t += 86400; // Passe au jour suivant
+                        }
+                        else
+                        {
+                            echo '<td>&nbsp;</td>'; // Case vide
+                        }
+                    }
+                    echo '</tr>';
+                }
+                echo '</tbody></table>';
+
+            }
+
+            $m = date('Y-n');
+            if (isset($_POST["mois"])){
+                $m = $_POST["mois"];
+            }
+            $mParse = date_parse($m);
+
+            $mMoins = date('Y-n',(strtotime($m.'- 1 months')));
+
+            $mPlus = date('Y-n',(strtotime($m.'+ 1 months')));
+            $mPlusParse = date_parse($mPlus);
+
+            $mPlusPlus = date('Y-n',(strtotime($m.'+ 2 months')));
+            $mPlusPlusParse = date_parse($mPlusPlus);
+
+            echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
+            echo '
+        <div class="calendriers">
+        <form class="select" method="post">
+          <input type="hidden" name="numChambre" value="'.$numChambre.'">
+          <input type="hidden" name="mois" value="'.$mMoins.'">
+          <input type="submit" name="" value="Moins">
+        </form>
+        <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
+        <input type="hidden" name="chambre_id" value="'.$numChambre.'">
+              ';
+            calendar($bdd,$mParse["month"],$mParse["year"],$numChambre);
+            calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre);
+            calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"],$numChambre);
+            echo '  
+        <input type="submit" name="" value="Valider">
+        </form>
+        <form class="select" method="post">
+          <input type="hidden" name="numChambre" value="'.$numChambre.'">
+          <input type="hidden" name="mois" value="'.$mPlus.'">
+          <input type="submit" name="" value="Plus">
+        </form>';
+
+        } else {
+            afficherErreur("Chambre introuvable");
+        }
+    } else {
+        afficherErreur(13);
+    }
+} else {
+    afficherErreur(7);
 }
 require 'paterns/Foot.php';
 ?>
