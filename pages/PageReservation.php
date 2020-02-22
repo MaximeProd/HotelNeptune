@@ -2,15 +2,15 @@
 <?php
 require 'paterns/Head.php';
 
-if (empty($_POST)){
-    $_POST = $_SESSION["memoryPost"];
+if (empty($_GET)){
+    $_GET = $_SESSION["memoryPost"];
 } else {
-    $_SESSION["memoryPost"] = $_POST;
+    $_SESSION["memoryPost"] = $_GET;
 }
 
 if (isset($bdd)){
     if(isset($idClient)){
-        $numChambre = getPost('numChambre');
+        $numChambre = getGet('numChambre');
         $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$numChambre),Array(),'*',"tarif_id=id");
         if (!empty($chambres)) {
 
@@ -106,8 +106,8 @@ if (isset($bdd)){
             }
 
             $m = date('Y-n');
-            if (isset($_POST["mois"])){
-                $m = $_POST["mois"];
+            if (isset($_GET["mois"])){
+                $m = $_GET["mois"];
             }
             $mParse = date_parse($m);
 
@@ -122,7 +122,7 @@ if (isset($bdd)){
             echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
             echo '
         <div class="calendriers">
-        <form class="select" method="post">
+        <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
           <input type="hidden" name="mois" value="'.$mMoins.'">
           <input type="submit" name="" value="Moins">
@@ -136,7 +136,7 @@ if (isset($bdd)){
             echo '  
         <input type="submit" name="" value="Valider">
         </form>
-        <form class="select" method="post">
+        <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
           <input type="hidden" name="mois" value="'.$mPlus.'">
           <input type="submit" name="" value="Plus">

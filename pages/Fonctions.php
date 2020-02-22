@@ -169,6 +169,13 @@ function getPost($askGet){
         return '';
     }
 }
+function getGet($askGet){
+    if (isset($_GET[$askGet])) {
+        return htmlspecialchars($_GET[$askGet]);
+    } else {
+        return '';
+    }
+}
 
 function afficherErreur($erreur = null){
     if (!empty($erreur)){
