@@ -74,12 +74,12 @@ if (isset($bdd)){
                                 $color = "blue";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
-                            } else if (!empty($listeReserv)){
-                                $color = "red";
-                                $lock = "lock";
-                                $locked = 'disabled="disabled"';
                             } else if (!empty($listeReservClient)){
                                 $color = "yellow";
+                                $lock = "lock";
+                                $locked = 'disabled="disabled"';
+                            } else if (!empty($listeReserv)){
+                                $color = "red";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
                             }
