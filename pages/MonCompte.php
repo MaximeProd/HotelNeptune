@@ -30,13 +30,13 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
             <div class="formulaire">
               <h4>Modifier mot de passe</h4>
               <hr>
-              <form class="" action="index.html" method="post">
+              <form class="" action="loginRegister/Updatepassword.php" method="post">
                 <label for="Mot de passe">Mot de passe</label>
-                <input type="password" name="mdp"          placeholder="Mot de passe"        maxlength="16"     minlength="6">
+                <input type="password" name="mdp"          placeholder="Mot de passe"        maxlength="16"     minlength="4" required>
                 <label for="newMdp">Nouveau mot de passe</label>
-                <input type="password" name="newMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="6">
+                <input type="password" name="newMdp"   placeholder="Confirmer mot de passe"  maxlength="16"     minlength="4" required>
                 <label for="confMdp">Comfirmer mot de passe</label>
-                <input type="password" name="confMdp" placeholder="Comfirmer mot de passe"       maxlength="16"     minlength="6">
+                <input type="password" name="confMdp" placeholder="Comfirmer mot de passe"       maxlength="16"     minlength="4" required>
                 <input id="Mdp" type="submit" name="confirmMdp" value="Modifier mot de passe">
               </form>
             </div>
@@ -45,7 +45,7 @@ echo '<link rel="stylesheet" href="../css/MonCompte.css">
               <hr>
               <form class="" action="loginRegister/RemoveCompte.php" method="post">
                 <label for="Mot de passe">Mot de passe</label>
-                <input type="password" name="mdp" value="" placeholder="Mot de passe">
+                <input type="password" name="mdp" value="" placeholder="Mot de passe" required>
                 <input id="Supr" type="submit" name="" value="Supprimer">
               </form>
               <form class="Register" action="loginRegister/Logout.php" method="post">

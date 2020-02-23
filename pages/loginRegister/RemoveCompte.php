@@ -11,11 +11,14 @@ if (isset ($bdd)) {
         $statement = $bdd->prepare($query);
         $statement->execute();
         $statement->closeCursor();
+        session_destroy();
+        header('Location: ../index.php');
     } else {
         $_SESSION["erreur"] = 5;
+        header('Location: ../MonCompte.php');
     }
 } else {
     $_SESSION["erreur"] = 7;
+    header('Location: ../index.php');
 }
-session_destroy();
-header('Location: ../index.php');
+
