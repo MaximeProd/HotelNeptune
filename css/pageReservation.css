@@ -74,15 +74,3 @@ h2{
     font-size:1.75vw;
 
 }
-
-.bandeau{
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100%;
-    width: 60%;
-    margin-bottom: -1vw;
-}
-.cadre{
-    display: flex;
-    justify-content: center;
-    height: fill;
-}
