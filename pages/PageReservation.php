@@ -8,9 +8,7 @@ if (empty($_GET)){
     $_SESSION["memoryPost"] = $_GET;
 }
 
-
 if (isset($bdd)){
-
     if(isset($idClient)){
         $numChambre = getGet('numChambre');
         $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$numChambre),Array(),'*',"tarif_id=id");
@@ -88,12 +86,10 @@ if (isset($bdd)){
 
                             $var = date('j',$t);
                             echo '   
-                            
                         <td class="'.$color.'">
                           <input class="checkboxCalendrier" id="toggle'.$t.'" type="checkbox" name="'.$t.'" '.$locked.'>
                           <label class="case '.$lock.'" for="'.$id.'">'.$var.'</label>
-                        </td> 
-                       
+                        </td>
                         '  ;// Affiche le jour du mois
 
                             $t += 86400; // Passe au jour suivant
@@ -123,11 +119,8 @@ if (isset($bdd)){
             $mPlusPlus = date('Y-n',(strtotime($m.'+ 2 months')));
             $mPlusPlusParse = date_parse($mPlusPlus);
 
-
+            echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
             echo '
-         <div class="cadre">
-          <div class="bandeau">
-        <link rel="stylesheet" href="../css/calendrier.css"><h44>Reservation de la chambre</h44>
         <div class="calendriers">
         <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
@@ -136,7 +129,6 @@ if (isset($bdd)){
         </form>
         <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
         <input type="hidden" name="chambre_id" value="'.$numChambre.'">
-        
               ';
             calendar($bdd,$mParse["month"],$mParse["year"],$numChambre,$idClient);
             calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre,$idClient);

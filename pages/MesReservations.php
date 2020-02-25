@@ -6,15 +6,20 @@ if (isset($bdd)){
         $search = Array();
         //On précomplèe une liste pour avoir le tableau associatif avec toute les clées
         if (isset($_POST)){
-            $listeElement = Array('chambre_id','jour');
+            $listeElement = Array('chambre_id','jour','selectclient');
             foreach ($listeElement as $item) {
                 if (isset($_POST[$item])){
                     $search += [$item => $_POST[$item]];
                 }   else {
                     $search += [$item => ""];
                 }
+
             }
+            if (!empty($search['selectclient'])) {
+                $idClient = $_POST['selectclient'];
+                }
         }
+
         //Augmenter la fonction getliste en mettant une liste dans le search
         $chambres = getListe($bdd,'planning',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*');
         echo  '   
@@ -32,8 +37,15 @@ if (isset($bdd)){
                   <form autocomplete="off" class="" action="MesReservations.php" method="post">
                   <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
                   <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
+                  <th><input type="hidden" name="selectclient" value="'.$idClient.'"></th>
+           
                   <th><input type="submit" name="" ></th>
-                  <th></th>
+                    Prix<td>'.$membre->id.'</td>
+                <td>'.$membre->nom.'</td>
+                <td>'.$membre->prenom.'</td>
+                <td>'.$membre->email.'</td
+                
+                  
                   </form> 
                 </tr>
                </thead>
@@ -45,7 +57,12 @@ if (isset($bdd)){
                     <tr>
                     <td>'.$chambre->chambre_id.'</td>
                     <td>'.$chambre->jour.'</td>
-                    <th><a href="#">Voir</a></th>
+                   <th><form class="" action="MesReservations.php" method="post"><input type="submit" value="Voir">
+                   <th><input type="hidden" name="selectclient" value="'.$idClient.'"></th>
+                    <p>Prix : \' . $chambre->prix . \' €</p>
+            <p>Capacité : \' . $chambre->capacite . \' place\'.$pluriel.\'</p>
+            <p>Nombre douche : \' .$chambre->douche .\'</p>
+            <p>Nombre étage : \' .$chambre->etage .\'</p>\';
                         </tr>
                     </tbody>';
             }
