@@ -8,9 +8,15 @@
 body {
 
 }
+.valid{
+  width:50vw;
+  position: absolute;
+  padding-bottom: 0;
+  font-size: 0.5vw;
 
+}
 .select{
-  width: 80vw;
+  width: 1vw;
   display: flex;
   flex-direction: row;
   justify-content:space-between;
@@ -25,6 +31,7 @@ display: none;
 }
 td{
   background-color: #6a8494;
+  width: 0.5vw;
 }
 .red{
   background-color: red;
@@ -38,7 +45,8 @@ td{
 
 .lock{
   display: block;
-  padding: 1vw;
+  padding: 0.5vw;
+
   text-align: center;
   color: #fff;
   user-select: none;
@@ -67,4 +75,17 @@ td{
 
 .checkboxCalendrier:checked + .open::before {
   background-color: #fff;
+}
+.bandeau{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 60%;
+  margin-bottom: -1vw;
+}
+
+.cadre{
+  display: flex;
+  justify-content: center;
+  height: fill;
+
 }

@@ -38,6 +38,7 @@ if (isset($bdd)) {
               </form>
             </tr>
            </thead>
+       </table>
 <?php
     if (!empty($chambres)) {
         foreach ($chambres as $chambre) {
@@ -48,13 +49,14 @@ if (isset($bdd)) {
             }
         echo '
          <link rel="stylesheet" href="../css/celluleChambre.css">
-           <div class="chambre">
+        <div class="chambre">
           <img src="images/chambre'.$chambre->numero.'_1.png">
           <div class="division">
             <h2>' . $chambre->nomChambre . '</h2>
             <p>Prix : ' . $chambre->prix . ' €</p>
             <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
-            <p></p>
+            <p>Nombre douche : ' .$chambre->douche .'</p>
+            <p>Nombre étage : ' .$chambre->etage .'</p>
             <form action="PageReservation.php" method="GET">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
