@@ -55,7 +55,8 @@ if (isset($bdd)) {
             <h2>' . $chambre->nomChambre . '</h2>
             <p>Prix : ' . $chambre->prix . ' €</p>
             <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
-            <p></p>
+            <p>Nombre douche : ' .$chambre->douche .'</p>
+            <p>Nombre étage : ' .$chambre->etage .'</p>
             <form action="PageReservation.php" method="GET">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>

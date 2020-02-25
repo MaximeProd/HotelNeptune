@@ -7,7 +7,7 @@ $listPost = $_POST;
 $_SESSION['savePostLogin'] = $_POST;
 
 if(isset($bdd)){
-    $_SESSION["erreur"] = 0;
+    $_SESSION["erreur"] = null;
     if (isset($listPost['mdp']) AND isset($listPost['email'])){
         $password = htmlspecialchars($_POST['mdp']);
         $liste = getListe($bdd,'membres',Array("email" => $listPost['email']),Array(),'mdp,id');
