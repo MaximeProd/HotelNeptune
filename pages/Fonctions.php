@@ -194,7 +194,7 @@ function afficherErreur($erreur = null){
         } elseif ($valueErreur  == 5) {
             $erreur = 'Email déjà utilisé';
         } elseif ($valueErreur  == 6) {
-        $erreur = 'Champ obligatoire incomplet';
+            $erreur = 'Champ obligatoire incomplet';
         } elseif ($valueErreur  == 7) {
             $erreur = 'Serveur introuvable!';
         } elseif ($valueErreur  == 8) {

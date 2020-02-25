@@ -38,7 +38,6 @@ if (isset($bdd)) {
               </form>
             </tr>
            </thead>
-       </table>
 <?php
     if (!empty($chambres)) {
         foreach ($chambres as $chambre) {
@@ -49,7 +48,7 @@ if (isset($bdd)) {
             }
         echo '
          <link rel="stylesheet" href="../css/celluleChambre.css">
-        <div class="chambre">
+           <div class="chambre">
           <img src="images/chambre'.$chambre->numero.'_1.png">
           <div class="division">
             <h2>' . $chambre->nomChambre . '</h2>

@@ -10,6 +10,8 @@ if (isset($bdd)){
     $membres = getListe($bdd,'membres',Array(),$search,'*');
     echo  ' 
        <link rel="stylesheet" href="../css/GérerMembres.css">
+       
+      
        <div class="cadre">
        <div class="bandeau">
        <table class="tableauMembre">
@@ -45,7 +47,7 @@ if (isset($bdd)){
                 <td>'.$membre->nom.'</td>
                 <td>'.$membre->prenom.'</td>
                 <td>'.$membre->email.'</td>
-                <th><a href="#">Voir</a></th>
+               <th><form class="" action="MesReservations.php" method="post"><input type="submit" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
                 <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
                 </tr>
                 </tbody>';
