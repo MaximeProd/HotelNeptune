@@ -8,7 +8,9 @@ if (empty($_POST)){
     $_SESSION["memoryPost"] = $_POST;
 }
 
+
 if (isset($bdd)){
+
     if(isset($idClient)){
         $numChambre = getPost('numChambre');
         $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$numChambre),Array(),'*',"tarif_id=id");
@@ -86,10 +88,12 @@ if (isset($bdd)){
 
                             $var = date('j',$t);
                             echo '   
+                            
                         <td class="'.$color.'">
                           <input class="checkboxCalendrier" id="toggle'.$t.'" type="checkbox" name="'.$t.'" '.$locked.'>
                           <label class="case '.$lock.'" for="'.$id.'">'.$var.'</label>
-                        </td>
+                        </td> 
+                       
                         '  ;// Affiche le jour du mois
 
                             $t += 86400; // Passe au jour suivant
@@ -119,8 +123,11 @@ if (isset($bdd)){
             $mPlusPlus = date('Y-n',(strtotime($m.'+ 2 months')));
             $mPlusPlusParse = date_parse($mPlusPlus);
 
-            echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
+
             echo '
+         <div class="cadre">
+          <div class="bandeau">
+        <link rel="stylesheet" href="../css/calendrier.css"><h44>Reservation de la chambre</h44>
         <div class="calendriers">
         <form class="select" method="post">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
@@ -129,18 +136,51 @@ if (isset($bdd)){
         </form>
         <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
         <input type="hidden" name="chambre_id" value="'.$numChambre.'">
+        
               ';
             calendar($bdd,$mParse["month"],$mParse["year"],$numChambre,$idClient);
             calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre,$idClient);
             calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"],$numChambre,$idClient);
             echo '  
-        <input type="submit" name="" value="Valider">
+        <input class="valid" type="submit" name="" value="Valider">
         </form>
         <form class="select" method="post">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
           <input type="hidden" name="mois" value="'.$mPlus.'">
           <input type="submit" name="" value="Plus">
-        </form>';
+        </form>
+        </div>';
+
+
+
+            $chambres = getListe($bdd,"chambres,tarifs",Array('numero'=>$numChambre),Array(),'*',"tarif_id=id");
+            $chambre = $chambres[0];
+            $pluriel ="";
+            if($chambre->capacite > 1) {
+                $pluriel = "s";
+            }
+
+            echo '
+          
+         <link rel="stylesheet" href="../css/pageReservation.css">
+           <div class="chambre">
+          <img src="images/chambre'.$chambre->numero.'_1.png">
+           <h2>' . $chambre->nomChambre . '</h2>
+          <div class="division">
+           
+            <p>Prix : ' . $chambre->prix . ' €</p>
+            <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
+            <p>Nombre douche : ' .$chambre->douche .'</p>
+            <p>Nombre étage : ' .$chambre->etage .'</p>
+          
+          </div>
+        </div>
+        </div>
+        </div>';
+
+
+
+
 
         } else {
             afficherErreur("Chambre introuvable");

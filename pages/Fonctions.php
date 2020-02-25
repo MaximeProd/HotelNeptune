@@ -24,7 +24,7 @@ function getDataBase() {
 
 function getDataBase() {
     try {
-        $bdd = new PDO('mysql:host=localhost;dbname=bddneptune;charset=utf8',
+        $bdd = new PDO('mysql:host=localhost;dbname=bbdneptune;charset=utf8',
             'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     } catch (Exception $exception) {

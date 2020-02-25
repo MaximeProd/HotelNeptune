@@ -8,7 +8,7 @@ unset($_SESSION["memoryPost"]);
 
 
 if (isset($bdd)) {
-    $search = generateSearch($_POST, Array("nomChambre","douche","capacite","exposition","numero","prix")); //
+    $search = generateSearch($_POST, Array("nomChambre","douche","capacite","exposition","numero","prix","etage",)); //
     $chambres = getListe($bdd,"chambres,tarifs",Array(),$search,'*',"tarif_id=id");
     ?>
        <link rel="stylesheet" href="../css/GérerMembres.css">
@@ -54,7 +54,8 @@ if (isset($bdd)) {
             <h2>' . $chambre->nomChambre . '</h2>
             <p>Prix : ' . $chambre->prix . ' €</p>
             <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
-            <p></p>
+            <p>Nombre douche : ' .$chambre->douche .'</p>
+            <p>Nombre étage : ' .$chambre->etage .'</p>
             <form action="PageReservation.php" method="POST">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
