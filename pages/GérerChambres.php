@@ -5,7 +5,7 @@ require 'paterns/Head.php';
 
 <html>
   <body>
-    <link rel="stylesheet" href="../css/GérerChambres.css">
+    <link rel="stylesheet" href="../css/MesReservations.css">
     <form enctype="multipart/form-data" action="loginRegister/AjouterChambre.php" method="get">
       <label for="image">Image : </label>             <input id="image" type="file" name="monfichier" accept="image/png, image/jpeg" required/>
       <label for="nomChambre">Nom de la chambre : </label> <input id="nomChambre" type="text" name="nomChambre" maxlength="250"     minlength="6" required/>
