@@ -10,7 +10,7 @@ if (!isset($_SESSION['idClient'])){
     if (isset($bdd)) {
         $membre = getListe($bdd, "membres", array("id" => $idClient));
 
-        //var_dump($idClient);
+        //var_dump($idClient                                                                                    );
         //var_dump($membre);
         $membre = $membre[0];
 

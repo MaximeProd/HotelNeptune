@@ -32,6 +32,7 @@ if (isset($bdd)){
                   <form autocomplete="off" class="" action="MesReservations.php" method="post">
                   <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
                   <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
+                  <th><input type="text" name="sup" value="Supprimer"></th>
                   <th><input type="submit" name="" ></th>
                   <th></th>
                   </form> 
@@ -45,6 +46,7 @@ if (isset($bdd)){
                     <tr>
                     <td>'.$chambre->chambre_id.'</td>
                     <td>'.$chambre->jour.'</td>
+                    th><form class="" action="loginRegister/RemoveReservation.php" method="post"><input type="submit" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
                     <th><a href="#">Voir</a></th>
                         </tr>
                     </tbody>';
