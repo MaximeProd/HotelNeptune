@@ -60,5 +60,11 @@ echo '
       </div>
     ';
 afficherErreur();
+echo '
+<div class="master">
+
+';
+
+
 ?>
 

@@ -12,17 +12,23 @@
 /*MAIN */
 main{
   background: linear-gradient(#2C0238, #602870) ;
-  height:fill;
+  height: auto;
   width:100%;
   font-size: 1vw;
   color:#FFF;
   padding-bottom: 1vw;
-
 }
+
+
 /*Fake Header*/
 header img{
   height: 10vw;
   width: 10vw;
+}
+
+
+body{
+  min-height: 100%;
 }
 
 .haut{
@@ -73,18 +79,17 @@ h2{
   text-decoration: none;
   background-image: radial-gradient(ellipse at 50% 110%, rgba(255,255,255,0.50)10%,transparent 75%);
   height: fill;
-  padding-bottom: 0.25w;
+  padding-bottom: 0.25vw;
   min-width: 1vw;
 }
 
 /*FOOTER*/
 
 footer {
-  position:relative;
-  bottom: 0;
   width: 100%;
   background-color: #4C0099;
 }
+
 .footer{
   height: 4vw;
   display: flex;

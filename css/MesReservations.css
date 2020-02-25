@@ -3,3 +3,32 @@ form {
   flex-direction: column;
   width: 20vw;
 }
+table {
+  color: white;
+  width: fill;
+}
+.body{
+  display: flex;
+  align-items: center;
+}
+.cadre{
+  display: flex;
+  justify-content: center;
+  height: fill;
+}
+.bandeau{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 60%;
+  margin-bottom: -1vw;
+}
+
+
+main{
+  padding-bottom: 19.80vw;
+}
+
+
+footer{
+  position:absolute;
+}
