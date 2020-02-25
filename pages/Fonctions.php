@@ -169,6 +169,13 @@ function getPost($askGet){
         return '';
     }
 }
+function getGet($askGet){
+    if (isset($_GET[$askGet])) {
+        return htmlspecialchars($_GET[$askGet]);
+    } else {
+        return '';
+    }
+}
 
 function afficherErreur($erreur = null){
     if (!empty($erreur)){
@@ -183,7 +190,7 @@ function afficherErreur($erreur = null){
         } elseif ($valueErreur  == 3) {
             $erreur = 'Email incorrect';
         } elseif ($valueErreur  == 4) {
-            $erreur = 'Les mots de passe ne corresponde pas';
+            $erreur = 'Les mots de passe ne correspondent pas';
         } elseif ($valueErreur  == 5) {
             $erreur = 'Email déjà utilisé';
         } elseif ($valueErreur  == 6) {

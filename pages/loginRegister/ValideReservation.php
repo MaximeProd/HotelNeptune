@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION["memoryPost"] += $_POST;
+$_SESSION["memoryPost"] += $_GET;
 require '../Fonctions.php';
 $bdd = getDataBase();
 if (isset($bdd) && isset($_SESSION["idClient"]) && isset($_POST["chambre_id"])) {

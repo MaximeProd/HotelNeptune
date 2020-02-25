@@ -5,17 +5,23 @@ $bdd = getDataBase();
 if (isset ($bdd)) {
     $password = htmlspecialchars($_POST['mdp']);
     $liste = getListe($bdd,'membres',Array("id" => $_SESSION['idClient']),Array(),'mdp');
-    if (count($liste) == 1 && password_verify($password, $liste[0]->mdp)) {
+    if (password_verify($password, $liste[0]->mdp)) {
         if ($_POST['newMdp'] == $_POST['confMdp']){
-            $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
-            updateListe($bdd,'membres',Array("mdp" => $_POST['mdp']),$_SESSION["idClient"]);
+            $encryptMdp = password_hash($_POST['newMdp'],PASSWORD_DEFAULT);
+            updateListe($bdd,'membres',Array("mdp" => $encryptMdp),$_SESSION["idClient"]);
+            $_SESSION["erreur"] = "Mot de passe modifié avec succés";
+            header('Location: ../MonCompte.php');
         }
         else{
             $_SESSION["erreur"] = 4;
+            header('Location: ../MonCompte.php');
         }
     } else {
-        $_SESSION["erreur"] = 4;
+        $_SESSION["erreur"] = "Mot de passe incorrect";
+        header('Location: ../MonCompte.php');
     }
 } else {
     $_SESSION["erreur"] = 7;
+    header('Location: ../index.php');
 }
+
