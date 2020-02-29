@@ -21,15 +21,14 @@ if (isset($bdd)){
         }
 
         //Augmenter la fonction getliste en mettant une liste dans le search
-        $chambres = getListe($bdd,'planning',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*');
+        $chambres = getListe($bdd,'planning, chambres',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*',"numero = chambre_id");
         echo  '   
            <link rel="stylesheet" href="../css/MesReservations.css">
            <table>
-              <caption>Liste des membres</caption>
                <thead> 
                 <tr> 
-                  <th>Nom</th>
-                  <th>Date</th>
+                    <th>Nom</th>
+                    <th>Date</th>
                 </tr>
                </thead>
                <thead> 
@@ -37,10 +36,8 @@ if (isset($bdd)){
                   <form autocomplete="off" class="" action="MesReservations.php" method="post">
                   <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
                   <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
-                  <th><input type="hidden" name="selectclient" value="'.$idClient.'"></th>
-           
-                  <th><input type="submit" name="" ></th>
-                  <th></th>
+                  <input type="hidden" name="selectclient" value="'.$idClient.'">
+                  <th><input type="submit" class="rechercher" value="Rechercher"></th>
                   </form> 
                 </tr>
                </thead>
@@ -50,17 +47,15 @@ if (isset($bdd)){
                 echo
                     '<tbody>
                     <tr>
-                    <td>'.$chambre->chambre_id.'</td>
+                    <td>'.$chambre->nomChambre.'</td>
                     <td>'.$chambre->jour.'</td>
-                   <th><form class="" action="MesReservations.php" method="post"><input type="submit" value="Voir">
-                   <th><input type="hidden" name="selectclient" value="'.$idClient.'"></th>
-                    <p>Prix : \' . $chambre->prix . \' €</p>
-            <p>Capacité : \' . $chambre->capacite . \' place\'.$pluriel.\'</p>
-            <p>Nombre douche : \' .$chambre->douche .\'</p>
-            <p>Nombre étage : \' .$chambre->etage .\'</p>\';
+                   <td><form class="" action="MesReservations.php" method="post"><input type="submit" class="voir" value="Voir"></form></td>
+                   <td><input type="hidden" name="selectclient" value="'.$idClient.'"></td>
                         </tr>
                     </tbody>';
             }
+        }else{
+        echo'<tbody><tr><td class="nul">Aucun résultat</td></tr></tbody>';
         }
         echo '
             </table>

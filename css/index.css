@@ -12,17 +12,28 @@
 /*MAIN */
 main{
   background: linear-gradient(#2C0238, #602870) ;
-  height:fill;
+  height:auto;
   width:100%;
   font-size: 1vw;
   color:#FFF;
   padding-bottom: 1vw;
-
+  min-height: 100%;
 }
 /*Fake Header*/
 header img{
   height: 10vw;
   width: 10vw;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 .haut{
@@ -80,8 +91,7 @@ h2{
 /*FOOTER*/
 
 footer {
-  position:relative;
-  bottom: 0;
+  position:absolute;
   width: 100%;
   background-color: #4C0099;
 }
