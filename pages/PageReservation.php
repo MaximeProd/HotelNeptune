@@ -1,7 +1,7 @@
 
 <?php
 require 'paterns/Head.php';
-
+//https://www.mon-code.net/article/56/Manipulation-des-dates-et-heures-en-PHP5-avec-la-classe-native-DateTime
 if (empty($_GET)){
     $_GET = $_SESSION["memoryPost"];
 } else {
@@ -25,21 +25,52 @@ if (isset($bdd)){
              * https://www.afjv.com/forums/sujet/5-266-1-fonction-php-pour-afficher-un-calendrier-en-html
              ****************************************/
 
-            function calendar ($bdd,$m, $y,$numChambre,$idClient)
+            function calendar ($bdd,$m,$numChambre,$idClient)
             {
+
                 $sem = array(6,0,1,2,3,4,5); // Correspondance des jours de la semaine : lundi = 0, dimanche = 6
 
                 $mois = array('','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
                 $week = array('lu','ma','me','je','ve','sa','di');
 
-                $t = mktime(12, 0, 0, $m, 1, $y); // Timestamp du premier jour du mois
-                $today = mktime(12, 0, 0, date('m'), date('d'), date('Y'))+86400;
+                $today2 = new DateTime(null, new DateTimeZone('Europe/Paris'));
+                $date = clone $today2;
+                //echo " - date :".$date->format('Y-m-d');
+
+                $date->modify('+'.$m.' month');
+                //echo " - date :".$date->format('Y-m-d');
+                $date->modify('first day of this month');
+                $m = $date->format('m');
+
+
+                $dateMax = clone $today2;
+                $dateMax->modify("+1 years");
+                //echo "Mois demandé :".$date->format('Y-m-d')." - Année max :".$dateMax->format('Y-m-d');
+
+
+                $query = "SELECT * FROM planning WHERE (chambre_id = ".$numChambre." OR client_id=".$idClient.") 
+                                AND (jour like '".$date->format('Y-m')."%' )";
+                $statement = $bdd->prepare($query);
+                $statement->execute();
+                $listeReserv = Array();
+                do {
+                    $value = $statement->fetch(PDO::FETCH_OBJ);
+                    if($value != null) {
+                        $reservDate = $value->jour;
+                        $reservDate = substr($reservDate, 0,10);
+                        $listeReserv += [$reservDate => $value];
+                    }
+                } while ($value != null);
+                $statement->closeCursor();
+                //var_dump($listeReserv);
+
+
                 echo '<table><tbody>';
 
         // Le mois
         //--------
-                echo '<tr><td colspan="7">'.$y.'</td></tr>
-                    <tr><td colspan="7">'.$mois[$m].'</td></tr>';
+                echo '<tr><td colspan="7">'.$date->format('Y').'</td></tr>
+                    <tr><td colspan="7">'.$mois[$date->format('n')].'</td></tr>';
 
         // Les jours de la semaine
         //------------------------
@@ -57,43 +88,45 @@ if (isset($bdd)){
                     echo '<tr>';
                     for ($i = 0 ; $i < 7 ; $i++) // 7 jours de la semaine
                     {
-                        $w = $sem[(int)date('w',$t)]; // Jour de la semaine à traiter
-                        $m2 = (int)date('n',$t); // Tant que le mois reste celui du départ
+                        $w = $sem[(int)$date->format('w')]; // Jour de la semaine à traiter
+                        $m2 = (int)$date->format('n'); // Tant que le mois reste celui du départ
+                        //echo $m2;
 
-                        //$demain = date('Y-m-d', strtotime(date($date).' +1 days'));
                         if (($w == $i) && ($m2 == $m)) // Si le jours de semaine et le mois correspondent
                         {
-                            $date= $y.'-'.date('m',$t).'-'.date('d',$t);
-                            $listeReserv = getListe($bdd,"planning",Array("chambre_id"=>$numChambre,"jour"=>$date));
-                            $listeReservClient = getListe($bdd,"planning",Array("client_id"=>$idClient,"jour"=>$date));
-                            $id = 'toggle'.$t.'';
                             $color = "";
                             $lock ="open";
                             $locked = "";
-                            if ($today > $t || $t > $today + 86400*365){
+                            $formatDate = $date->format("Y-m-d");
+                            if ($date <= $today2 || $date > $dateMax){
                                 $color = "blue";
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
-                            } else if (!empty($listeReservClient)){
-                                $color = "yellow";
+                            } elseif (isset($listeReserv[$formatDate])){
                                 $lock = "lock";
                                 $locked = 'disabled="disabled"';
-                            } else if (!empty($listeReserv)){
-                                $color = "red";
-                                $lock = "lock";
-                                $locked = 'disabled="disabled"';
+                                $contenu = $listeReserv[$formatDate];
+                                if ($contenu->client_id == $idClient){
+                                    $color = "yellow";
+                                } else {
+                                    $color = "red";
+                                }
+
                             }
 
-                            $var = date('j',$t);
+                            //Case d'un jour
                             echo '   
                         <td class="'.$color.'">
-                          <input class="checkboxCalendrier" id="toggle'.$t.'" type="checkbox" name="'.$t.'" '.$locked.'>
-                          <label class="case '.$lock.'" for="'.$id.'">'.$var.'</label>
+                          <input class="checkboxCalendrier" id="'.$formatDate.'" type="checkbox" name="'.$formatDate.'" value="'.$formatDate.'" '.$locked.'>
+                          <label class="case '.$lock.'" for="'.$formatDate.'">'.$date->format("d").'</label>
                         </td>
                         '  ;// Affiche le jour du mois
 
-                            $t += 86400; // Passe au jour suivant
+                            $date->modify("+ 1 days");
+                            //echo $date->format('Y-m-d');
+
                         }
+
                         else
                         {
                             echo '<td>&nbsp;</td>'; // Case vide
@@ -105,44 +138,35 @@ if (isset($bdd)){
 
             }
 
-            $m = date('Y-n');
+            $m = 0;
             if (isset($_GET["mois"])){
                 $m = $_GET["mois"];
             }
-            $mParse = date_parse($m);
+            echo "DATE" .$m;
 
-            $mMoins = date('Y-n',(strtotime($m.'- 1 months')));
-
-            $mPlus = date('Y-n',(strtotime($m.'+ 1 months')));
-            $mPlusParse = date_parse($mPlus);
-
-            $mPlusPlus = date('Y-n',(strtotime($m.'+ 2 months')));
-            $mPlusPlusParse = date_parse($mPlusPlus);
-
-            echo '<link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>';
             echo '
+        <link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>
         <div class="calendriers">
         <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
-          <input type="hidden" name="mois" value="'.$mMoins.'">
+          <input type="hidden" name="mois" value="'.($m-1).'">
           <input type="submit" name="" value="Moins">
         </form>
         <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
         <input type="hidden" name="chambre_id" value="'.$numChambre.'">
               ';
-            calendar($bdd,$mParse["month"],$mParse["year"],$numChambre,$idClient);
-            calendar($bdd,$mPlusParse["month"],$mPlusParse["year"],$numChambre,$idClient);
-            calendar($bdd,$mPlusPlusParse["month"],$mPlusPlusParse["year"],$numChambre,$idClient);
+            calendar($bdd,$m,$numChambre,$idClient);
+            calendar($bdd,$m+1,$numChambre,$idClient);
+            calendar($bdd,$m+2,$numChambre,$idClient);
             echo '  
         <input class="valid" type="submit" name="" value="Valider">
         </form>
         <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
-          <input type="hidden" name="mois" value="'.$mPlus.'">
+          <input type="hidden" name="mois" value="'.($m+1).'">
           <input type="submit" name="" value="Plus">
         </form>
         </div>';
-
 
 
             $chambres = getListe($bdd,"chambres,tarifs",Array('numero'=>$numChambre),Array(),'*',"tarif_id=id");
@@ -169,11 +193,6 @@ if (isset($bdd)){
         </div>
         </div>
         </div>';
-
-
-
-
-
         } else {
             afficherErreur("Chambre introuvable");
         }

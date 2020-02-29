@@ -197,16 +197,6 @@ function afficherErreur($erreur = null){
             $erreur = 'Champ obligatoire incomplet';
         } elseif ($valueErreur  == 7) {
             $erreur = 'Serveur introuvable!';
-        } elseif ($valueErreur  == 8) {
-            $erreur = 'Veuillez saisir des jours consécutifs';
-        } elseif ($valueErreur  == 9) {
-            $erreur = 'Aucun jour sélectionné';
-        } elseif ($valueErreur  == 10) {
-            $erreur = 'Chambre déjà réservée';
-        } elseif ($valueErreur  == 11) {
-            $erreur = 'Chambre réservé avec succés';
-        } elseif ($valueErreur  == 12) {
-            $erreur = 'Vous ne pouvez pas réserver plus d\'une semaine une chambre';
         } elseif ($valueErreur  == 13) {
             $erreur = 'Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>';
         } else {
