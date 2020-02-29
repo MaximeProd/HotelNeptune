@@ -15,7 +15,6 @@ if (isset($bdd)) {
        <div class="cadre">
        <div class="bandeau">
        <table class="Les chambres :">
-          <caption>Liste des membres</caption>
            <thead> 
             <tr>
             <?php
@@ -38,6 +37,7 @@ if (isset($bdd)) {
               </form>
             </tr>
            </thead>
+       </table>
 <?php
     if (!empty($chambres)) {
         foreach ($chambres as $chambre) {

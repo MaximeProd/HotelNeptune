@@ -29,7 +29,8 @@
     margin-top: 2vw;
     cursor: pointer;
     font-size: 0.9vw;
-    font-weight: bold;font-family: 'Acme', sans-serif;
+    font-weight: bold;
+    font-family: 'Acme', sans-serif;
     border-radius: 1vw;
     width: 9vw;
 }

@@ -21,8 +21,8 @@ main{
 }
 /*Fake Header*/
 header img{
-  height: 4.75vw;
-  width: 4.75vw;
+  height: 10vw;
+  width: 10vw;
 }
 
 .haut{
@@ -36,7 +36,7 @@ header img{
 }
 
 h1{
-  font-size: 2.75vw;
+  font-size: 5vw;
   color: white;
   font-family: 'Sniglet', sans-serif;
 }
@@ -50,7 +50,7 @@ h2{
   position: sticky;
   top:0;
   background: linear-gradient(to right,#2C0238, #7D488C);
-  height: 1vw;
+  height: 2vw;
   font-family: 'Acme', sans-serif;
   display: flex;
   justify-content: space-around;
@@ -73,7 +73,7 @@ h2{
   text-decoration: none;
   background-image: radial-gradient(ellipse at 50% 110%, rgba(255,255,255,0.50)10%,transparent 75%);
   height: fill;
-  padding-bottom: 0.25w;
+  padding-bottom: 0.25vw;
   min-width: 1vw;
 }
 

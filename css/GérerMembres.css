@@ -17,3 +17,9 @@ table {
   width: 60%;
   margin-bottom: -1vw;
 }
+
+caption{
+    margin-left: 8vw;
+    font-size: 2vw;
+    color: red;
+}

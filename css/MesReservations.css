@@ -32,3 +32,23 @@ main{
 footer{
   position:absolute;
 }
+
+input, select{
+  margin-bottom: 1vw;
+}
+
+.valider{
+  width: 8vw;
+  height: 2vw;
+  font-size: 1vw;
+  font-weight: bold;
+  color: white;
+  background-color: red;
+  border-radius: 1vw;
+  border-color: red;
+  cursor: pointer;
+}
+
+.valider:hover{
+  border-color: white;
+}
