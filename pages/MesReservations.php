@@ -3,6 +3,7 @@ require 'paterns/Head.php';
 
 if (isset($bdd)){
     if ($idClient !=0) {
+        $titrePage = "Vos réservations : ";
         $search = Array();
         //On précomplèe une liste pour avoir le tableau associatif avec toute les clées
         if (isset($_POST)){
@@ -13,18 +14,22 @@ if (isset($bdd)){
                 }   else {
                     $search += [$item => ""];
                 }
-
             }
-            if (!empty($search['selectclient'])) {
+            if (!empty($_POST['selectclient'])) {
                 $idClient = $_POST['selectclient'];
-                }
+                $fullName = getListe($bdd, 'membres',Array('id'=>$idClient),Array(),'nom,prenom');
+                $fullName = $fullName[0];
+                $titrePage = "Réservation du client n°".$idClient."\n alias (".$fullName->nom. " ".$fullName->prenom. ")";
+            }
         }
 
         //Augmenter la fonction getliste en mettant une liste dans le search
+
         $chambres = getListe($bdd,'planning, chambres',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*',"numero = chambre_id");
         echo  '   
            <link rel="stylesheet" href="../css/MesReservations.css">
            <table>
+              <caption>'.$titrePage.'</caption>
                <thead> 
                 <tr> 
                     <th>Nom</th>

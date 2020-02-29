@@ -10,8 +10,6 @@ if (isset($bdd)){
     $membres = getListe($bdd,'membres',Array(),$search,'*');
     echo  ' 
        <link rel="stylesheet" href="../css/GérerMembres.css">
-       
-      
        <div class="cadre">
        <div class="bandeau">
        <table class="tableauMembre">
