@@ -142,15 +142,15 @@ if (isset($bdd)){
             if (isset($_GET["mois"])){
                 $m = $_GET["mois"];
             }
-            echo "DATE" .$m;
+
 
             echo '
-        <link rel="stylesheet" href="../css/calendrier.css"><td>Bonsoir</td>
+        <link rel="stylesheet" href="../css/calendrier.css">
         <div class="calendriers">
         <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
           <input type="hidden" name="mois" value="'.($m-1).'">
-          <input type="submit" name="" value="Moins">
+          <input class="moins" type="submit" name="" value="Moins">
         </form>
         <form class="calendriers" action="loginRegister/ValideReservation.php" method="post">
         <input type="hidden" name="chambre_id" value="'.$numChambre.'">
@@ -164,7 +164,7 @@ if (isset($bdd)){
         <form class="select" method="GET">
           <input type="hidden" name="numChambre" value="'.$numChambre.'">
           <input type="hidden" name="mois" value="'.($m+1).'">
-          <input type="submit" name="" value="Plus">
+            <input class="plus" type="submit" name="" value="Plus">
         </form>
         </div>';
 

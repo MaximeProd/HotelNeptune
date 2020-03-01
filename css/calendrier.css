@@ -9,14 +9,16 @@ body {
 
 }
 .valid{
-  width:50vw;
+  width:10vw;
   position: absolute;
   padding-bottom: 0;
-  font-size: 0.5vw;
+  font-size: 0.8vw;
+  margin-left: 68vw;
 
 }
+}
 .select{
-  width: 1vw;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content:space-between;
@@ -40,7 +42,7 @@ td{
   background-color: blue;
 }
 .yellow{
-  background-color: #c9ab00;
+  background-color: yellow;
 }
 
 .lock{
@@ -60,7 +62,6 @@ td{
   user-select: none;
   transition: background-color 0s;
 }
-
 .open::before {
   transition: background-color 0.2s;
 }
