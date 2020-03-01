@@ -19,10 +19,9 @@ if (!isset($_SESSION['idClient'])){
               <div class="bandeau">
                 <h3>Mon Compte</h3>
                 <div class="formulaire">
-                  <h4>Informations personnels</h4>
+                  <h4>Informations personnelles</h4>
                   <hr>
                   <form class="" action="loginRegister/Update.php" method="post">
-                      <label for="civilite">Civilité</label>       <input type="hidden"name="civilite"  value="' . $membre->civilite . '"       placeholder="Nom"            maxlength="100" minlength="3">
                       <label for="nom">Nom</label>                 <input type="text" name="nom"        value="' . $membre->nom . '"            placeholder="Nom"            maxlength="100" minlength="3">
                       <label for="prenom">Prénom</label>           <input type="text" name="prenom"     value="' . $membre->prenom . '"         placeholder="Prénom"         maxlength="70"  minlength="3" >
                       <label for="adresse">Adresse</label>         <input type="text" name="adresse"    value="' . $membre->adresse . '"        placeholder="Adresse"        maxlength="200">
