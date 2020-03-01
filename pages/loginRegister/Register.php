@@ -6,7 +6,6 @@ $bdd = getDataBase();
 $_SESSION['savePostRegister'] = $_POST;
 if (isset($bdd)){
     $insert = Array();
-    $_SESSION["erreur"] = 0;
     //Partie vérification qu'il n'y est pas d'erreur dans l'enregistrement
     if (isset($_POST)){
         //Pas besoin de vérifier que le formulaire est plein -> déjà gérer par l'html
@@ -21,7 +20,7 @@ if (isset($bdd)){
             $_SESSION["erreur"] = 2;
         }
     }
-    if ($_SESSION["erreur"] == 0) {
+    if (!isset($_SESSION["erreur"])) {
         //Cryptage mdp :
         $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
         unset($_POST['confirmMdp']);
