@@ -19,7 +19,34 @@ table {
 }
 
 caption{
-    margin-left: 8vw;
     font-size: 2vw;
     color: red;
+}
+
+.valider{
+    border-radius: 1vw;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border-color: red;
+    width: 5vw;
+    height: 1.3vw;
+}
+
+.valider:hover{
+    border-color: white;
+}
+
+table{
+    width: 100%;
+    padding: 2vw;
+}
+
+.bonsoir:hover{
+    border-color: black;
+    cursor: pointer;
+}
+
+input[type=text]{
+    width: 100%;
 }

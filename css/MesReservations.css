@@ -63,3 +63,9 @@ th{
 .nul{
   font-size: 1.3vw;
 }
+
+caption{
+  font-size: 1.3vw;
+  margin-bottom: 2vw;
+  font-weight: bold;
+}

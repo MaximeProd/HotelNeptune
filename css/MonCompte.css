@@ -17,12 +17,14 @@
     margin-left: 45vw;
     background-color: red;
     color: white;
+    border-color: red;
 }
 
 #Deco:hover{
     color: red;
     background-color: white;
     font-family: 'Acme', sans-serif;
+    border-color: white;
 }
 
 #Mdp{

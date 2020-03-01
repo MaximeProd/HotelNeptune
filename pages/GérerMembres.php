@@ -30,7 +30,7 @@ if (isset($bdd)){
               <th><input type="text" name="nom" value="'.$search['nom'].'"></th>
               <th><input type="text" name="prenom" value="'.$search['prenom'].'"></th>
               <th><input type="text" name="Email" value="'.$search['email'].'"></th>
-              <th><input type="submit" name="" ></th>
+              <th><input type="submit" class="valider" name="" ></th>
               <th></th>
               </form> 
             </tr>
@@ -45,8 +45,8 @@ if (isset($bdd)){
                 <td>'.$membre->nom.'</td>
                 <td>'.$membre->prenom.'</td>
                 <td>'.$membre->email.'</td>
-               <th><form class="" action="MesReservations.php" method="post"><input type="submit" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
-                <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
+               <th><form class="" action="MesReservations.php" method="post"><input type="submit" class="bonsoir" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
+                <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" class="bonsoir" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
                 </tr>
                 </tbody>';
         }
