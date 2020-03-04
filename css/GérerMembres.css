@@ -60,6 +60,7 @@ input[type=text]{
     height: 2vw;
     font-weight: bold;
     font-size: 0.8vw;
+    margin-left: 1vw;
 }
 
 .valid:hover{
