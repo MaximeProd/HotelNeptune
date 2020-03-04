@@ -62,10 +62,16 @@ if (isset($bdd)) {
             </form>
           </div>
         </div>';
+
         }
     } else {
         echo "<p>Aucun résulat</p>";
     }
+    echo '<p>TEST</p>';
+            $retour = mail('maximeb.game@gmail.com', 'Envoi depuis la page Contact', "BONSOIR test", "FROM : mbourrier@booprod.com");
+            if ($retour) {
+                echo '<p>Votre message a bien été envoyé.</p>';
+            }
 }
 
 

@@ -6,7 +6,7 @@ $bdd = getDataBase();
 if (isset ($bdd)) {
     $password = htmlspecialchars($_POST['mdp']);
     $liste = getListe($bdd,'membres',Array("id" => $_SESSION['idClient']),Array(),'mdp');
-    if (count($liste) == 1 && password_verify($password, $liste[0]->mdp)) {
+    if (password_verify($password, $liste[0]->mdp)) {
         $query = "DELETE FROM membres WHERE id=" . $idClient;
         $statement = $bdd->prepare($query);
         $statement->execute();
@@ -14,7 +14,7 @@ if (isset ($bdd)) {
         session_destroy();
         header('Location: ../index.php');
     } else {
-        $_SESSION["erreur"] = 5;
+        $_SESSION["erreur"] = "Le mot de passe ne correspond pas";
         header('Location: ../MonCompte.php');
     }
 } else {
