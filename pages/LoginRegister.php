@@ -5,7 +5,7 @@ require 'paterns/Head.php';
 
 //Completion des listes pour les éviter les erreurs si elle sont vide
 if (!isset($_SESSION['savePostRegister']) || empty($_SESSION['savePostRegister'])){
-    $savePostRegister =array ("email"=>"","mdp"=>"","confirmMdp"=>"","nom"=>"","prenom"=>"","adresse"=>"","ville"=>"","codePostal"=>"","civilite"=>"Monsieur");
+    $savePostRegister = array ("email"=>"","mdp"=>"","confirmMdp"=>"","nom"=>"","prenom"=>"","adresse"=>"","ville"=>"","codePostal"=>"");
 } else {
     $savePostRegister = $_SESSION['savePostRegister'];
     unset($_SESSION['savePostRegister']);

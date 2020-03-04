@@ -97,12 +97,12 @@ function updateListe(PDO $bdd,$fromTable,Array $args,$idModif) {
     // array( 'nom' => Bourrier, 'prenom' => 'Maxime')
     //ET AUSSI il faut donner l'id de l'éllement à modife
     //var_dump($idModif);
-    $query = "UPDATE {$fromTable} SET id={$idModif} ";
+    $query = "UPDATE {$fromTable} SET {$idModif} ";
     //Etape 1 : On génère la requête sql avec les arguments demandés :
     foreach ($args as $key => $arg) {
         $query = "{$query} , {$key} = :p_{$key} ";
     }
-    $query = "{$query} WHERE id = {$idModif}";
+    $query = "{$query} WHERE {$idModif}";
     //Affectation des paramètres (Pour rappel les paramètres (p_arg) sont une sécuritée)
     $statement = $bdd->prepare($query);
     //$statement->bindValue(':p_id', $idModif);

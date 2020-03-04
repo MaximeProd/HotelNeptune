@@ -5,9 +5,10 @@ require '../Fonctions.php';
 // incluant l'heure a la seconde pres
 //var_dump($_POST);
 unset($_SESSION["erreur"]);
-
+$_SESSION['saveChambre'] = $_POST;
 if(isset($_POST)){
     $bdd = getDataBase();
+    /*
     $getid = getListe($bdd,"chambres",Array(),Array(),"numero");
     $numero = end($getid)->numero + 1;
 
@@ -34,24 +35,35 @@ if(isset($_POST)){
                 " vérifiez l'existence du répertoire ".$repertoireDestination;
         }
     }
-
-
-
-
+    */
 
     if ($_POST["tarif_id"] == "Sélectionner un prix"){
         $_SESSION["erreur"] = "Veuillez sélectionner un prix !";
     }
-    if (!isset($_SESSION["erreur"])){
-        $bdd = getDataBase();
-        unset($_POST["image"]);
-        unset($_POST["MAX_FILE_SIZE"]);
-        insertListe($bdd,"chambres",$_POST);
-        $_SESSION["erreur"] = "Chambre ajouté avec succée !";
-        header('Location: ../index.php');
+    $bdd = getDataBase();
+    if (!isset($_SESSION["erreur"])) {
+        if ($_POST["modif"] != "false"){
+            unset($_POST["image"]);
+            $modif = $_POST["modif"];
+            unset($_POST["modif"]);
+            unset($_POST["monfichier"]);
+            var_dump($_POST);
+            updateListe($bdd,'chambres',$_POST,"numero=".$modif);
+            $_SESSION["erreur"] = "Chambre modifié avec succée !";
+            unset($_SESSION['saveChambre']);
+            header('Location: ../index.php');
+        } else {
+            unset($_POST["image"]);
+            unset($_POST["modif"]);
+            unset($_POST["monfichier"]);
+            insertListe($bdd, "chambres", $_POST);
+            $_SESSION["erreur"] = "Chambre ajouté avec succée !";
+            header('Location: ../index.php');
+        }
     } else {
         header('Location: ../GérerChambres.php');
     }
+
 } else {
     $_SESSION["erreur"] = "Accès réservé";
     //header('Location: ../GérerChambres.php');

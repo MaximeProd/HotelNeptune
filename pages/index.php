@@ -62,12 +62,12 @@ if (isset($bdd)) {
             </form>';
             if ($admin){
                 echo '
-                <form action="PageReservation.php" method="GET">
-                <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
+                <form action="GérerChambres.php" method="post">
+                <input type="hidden" name="modif" value="'.$chambre->numero.'">
                 <input type="submit" value="Modifer"/>
             </form>
-            <form action="PageReservation.php" method="GET">
-                <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
+            <form action="GérerChambres.php" method="post">
+                <input type="hidden" name="numero" value="'.$chambre->numero.'">
                 <input type="submit" value="Supprimer"/>
             </form>';
             }
