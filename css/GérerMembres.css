@@ -50,3 +50,18 @@ table{
 input[type=text]{
     width: 100%;
 }
+.valid{
+    border-radius: 1vw;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    border-color: red;
+    width: 5vw;
+    height: 2vw;
+    font-weight: bold;
+    font-size: 0.8vw;
+}
+
+.valid:hover{
+    border-color: white;
+}
