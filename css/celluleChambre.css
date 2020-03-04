@@ -50,6 +50,7 @@
     background:red;
     font-family: 'Acme', sans-serif;
     color:#fff;
+    cursor: pointer;
 }
 .chambre input:hover{
     border: white solid;
@@ -58,3 +59,6 @@
     border: white solid ;
 }
 
+.suppr{
+    margin-left: 8vw;
+}
