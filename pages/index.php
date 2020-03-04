@@ -59,19 +59,25 @@ if (isset($bdd)) {
             <form action="PageReservation.php" method="GET">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
+            </form>';
+            if ($admin){
+                echo '
+                <form action="PageReservation.php" method="GET">
+                <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
+                <input type="submit" value="Modifer"/>
             </form>
+            <form action="PageReservation.php" method="GET">
+                <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
+                <input type="submit" value="Supprimer"/>
+            </form>';
+            }
+            echo '
           </div>
         </div>';
-
         }
     } else {
         echo "<p>Aucun résulat</p>";
     }
-    echo '<p>TEST</p>';
-            $retour = mail('maximeb.game@gmail.com', 'Envoi depuis la page Contact', "BONSOIR test", "FROM : mbourrier@booprod.com");
-            if ($retour) {
-                echo '<p>Votre message a bien été envoyé.</p>';
-            }
 }
 
 

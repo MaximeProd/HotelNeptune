@@ -10,6 +10,7 @@ if ($admin) {
     <body>
     <link rel="stylesheet" href="../css/GérerChambres.css">
     <form enctype="multipart/form-data" action="loginRegister/AjouterChambre.php" method="get">
+        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
         <label for="image">Image : </label> <input id="image" type="file" name="monfichier"
                                                    accept="image/png, image/jpeg" required/>
         <label for="nomChambre">Nom de la chambre : </label> <input id="nomChambre" type="text" name="nomChambre"

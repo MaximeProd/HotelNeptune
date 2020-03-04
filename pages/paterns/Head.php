@@ -9,7 +9,7 @@ if (isset($_SESSION['idClient'])){
     $Compte = 'Mon Compte';
     $lien = "MonCompte.php";
 }
-var_dump($idClient);
+//var_dump($idClient);
 
 $bdd = getDataBase();
 $pageAdmin = null;
