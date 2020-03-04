@@ -3,10 +3,10 @@ session_start();
 require '../Fonctions.php';
 $bdd = getDataBase();
 if (isset($bdd)){
-    if (!empty($_POST['civilite']) && !empty($_POST['nom']) && !empty($_POST['prenom'])){
+    if (isset($_POST)){
         updateListe($bdd,'membres',$_POST,$_SESSION['idClient']);
+        $_SESSION["erreur"] = "Compte modifié avec succés";
     }
-    $_SESSION["erreur"] = "Compte modifié avec succés";
 } else {
     $_SESSION["erreur"]=7;
 }
