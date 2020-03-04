@@ -30,10 +30,10 @@ if (isset($bdd)) {
              <form autocomplete="off" class="" action="index.php" method="post">
                 <?php
                 foreach ($search as $key => $element){
-                    echo "<th><input type='text' name='".$key."' value='".$search[$key]."'></th>";
+                    echo "<th><input  type='text' class='rechercher' name='".$key." ' value='".$search[$key]."'></th>";
                 }
                 ?>
-              <th><input type="submit" name="" ></th>
+              <th><input type="submit" class="valid" name="" ></th>
               </form>
             </tr>
            </thead>
