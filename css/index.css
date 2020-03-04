@@ -25,13 +25,15 @@ header img{
   width: 10vw;
 }
 
-html, body {
+html {
   height: 100%;
-  margin: 0; padding: 0;
 }
+
 body {
-  display : table;
-  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 .haut{
