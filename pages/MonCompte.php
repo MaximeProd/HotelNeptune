@@ -3,7 +3,6 @@
 require 'paterns/Head.php';
 
 //Partie code
-$bdd = getDataBase();
 if (!isset($_SESSION['idClient'])){
     header('Location: LoginRegister.php');
 } else {
