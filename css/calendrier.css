@@ -3,20 +3,25 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
-
-
-body {
-
+.valid:hover{
+  border-color: white;
 }
+
 .valid{
-  width:10vw;
+  width:8vw;
   position: absolute;
   padding-bottom: 0;
   font-size: 0.8vw;
-  margin-left: 68vw;
+  margin-left: 70vw;
+  border-radius: 1vw;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-color: red;
+}
+}
 
-}
-}
 .select{
   width: 100vw;
   display: flex;
@@ -42,7 +47,7 @@ td{
   background-color: blue;
 }
 .yellow{
-  background-color: yellow;
+  background-color: #f5c542;
 }
 
 .lock{
@@ -88,5 +93,12 @@ td{
   display: flex;
   justify-content: center;
   height: fill;
+}
 
+.plus{
+  cursor: pointer;
+}
+
+.moin{
+  cursor: pointer;
 }
