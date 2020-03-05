@@ -54,8 +54,6 @@ if (isset($bdd)){
           </div>
         </div>
         ';
-    } else {
-        afficherErreur("Pas de preview");
     }
 
 
