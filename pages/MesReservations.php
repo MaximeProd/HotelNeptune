@@ -7,7 +7,7 @@ if (isset($bdd)){
         $search = Array();
         //On précomplèe une liste pour avoir le tableau associatif avec toute les clées
         if (isset($_POST)){
-            $listeElement = Array('chambre_id','jour');
+            $listeElement = Array('chambre_id','jour','previewNum');
             foreach ($listeElement as $item) {
                 if (isset($_POST[$item])){
                     $search += [$item => $_POST[$item]];
@@ -23,10 +23,47 @@ if (isset($bdd)){
             }
         }
 
+
+
+
+
+
         //Augmenter la fonction getliste en mettant une liste dans le search
 
         $chambres = getListe($bdd,'planning, chambres',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*',"numero = chambre_id");
-        echo  '   
+        if ($search["previewNum"] != ""){
+            $preview = getListe($bdd,"chambres,tarifs",Array('numero'=>$search["previewNum"]),Array(),'*',"tarif_id=id");
+            $preview = $preview[0];
+            $pluriel ="";
+            if($preview->capacite > 1) {
+                $pluriel = "s";
+            }
+
+            echo '
+         <link rel="stylesheet" href="../css/pageReservation.css">
+           <div class="chambre">
+          <img src="images/chambre'.$preview->numero.'_1.png">
+           <h2>' . $preview->nomChambre . '</h2>
+          <div class="division">
+           
+            <p>Prix : ' . $preview->prix . ' €</p>
+            <p>Capacité : ' . $preview->capacite . ' place'.$pluriel.'</p>
+            <p>Nombre douche : ' .$preview->douche .'</p>
+            <p>Nombre étage : ' .$preview->etage .'</p>
+          
+          </div>
+        </div>
+        ';
+    } else {
+        afficherErreur("Pas de preview");
+    }
+
+
+
+
+
+
+    echo  '   
            <link rel="stylesheet" href="../css/MesReservations.css">
            <table>
               <caption>'.$titrePage.'</caption>
@@ -54,7 +91,7 @@ if (isset($bdd)){
                     <tr>
                     <td>'.$chambre->nomChambre.'</td>
                     <td>'.$chambre->jour.'</td>
-                   <td><form class="" action="MesReservations.php" method="post"><input type="submit" class="voir" value="Voir"></form></td>
+                   <td><form class="" action="MesReservations.php" method="post"><input type="hidden" name="previewNum" value="'.$chambre->numero.'"><input type="submit" class="voir" value="Voir"></form></td>
                    <td><input type="hidden" name="selectclient" value="'.$idClient.'"></td>
                         </tr>
                     </tbody>';

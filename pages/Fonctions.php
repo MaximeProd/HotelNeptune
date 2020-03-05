@@ -9,7 +9,7 @@
 //Récupérer entre parenthèse
 //https://www.developpez.net/forums/d1469403/php/langage/recuperer-chaine-entre-parentheses/
 //https://www.developpez.net/forums/d812317/bases-donnees/oracle/outils/sql-plus/connaitre-type-champs-d-table/
-
+/*
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddNeptune;charset=utf8;port=5206;',
@@ -20,7 +20,7 @@ function getDataBase() {
     }
     return $bdd;
 }
-
+*/
 /*
 function getDataBase() {
     try {
@@ -33,7 +33,7 @@ function getDataBase() {
     return $bdd;
 }
 */
-/*
+
 function getDataBase() {
     try {
         $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddNeptune;charset=utf8;',
@@ -43,7 +43,7 @@ function getDataBase() {
         $bdd = null;
     }
     return $bdd;
-}*/
+}
 
 function getListe(PDO $bdd,$fromTable,Array $cond = [],Array $condLike = [],$askSelect = '*',$specialCond= "") { //Cond pour Condition
     //Pour utiliser cette fonction il faut lui envoyer :
