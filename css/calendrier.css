@@ -4,17 +4,22 @@
   box-sizing: border-box;
 }
 
-
-body {
-
+.valid:hover{
+  border-color: white;
 }
+
 .valid{
-  width:10vw;
+  width:8vw;
   position: absolute;
   padding-bottom: 0;
   font-size: 0.8vw;
-  margin-left: 68vw;
-
+  margin-left: 72vw;
+  border-radius: 1vw;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-color: red;
 }
 }
 .select{
@@ -42,12 +47,11 @@ td{
   background-color: blue;
 }
 .yellow{
-  background-color: yellow;
+  background-color: #d6800f;
 }
 
 .lock{
   display: block;
-  padding: 0.5vw;
 
   text-align: center;
   color: #fff;
@@ -55,7 +59,6 @@ td{
 }
 .open {
   display: block;
-  padding: 1vw;
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -88,5 +91,21 @@ td{
   display: flex;
   justify-content: center;
   height: fill;
+}
+.case {
+  padding: 1vw;
+}
 
+.plus{
+  cursor: pointer;
+}
+.plus:hover{
+  border-color: black;
+}
+
+.moin{
+  cursor: pointer;
+}
+.moin:hover{
+  border-color: black;
 }

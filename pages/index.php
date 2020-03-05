@@ -33,7 +33,7 @@ if (isset($bdd)) {
                     echo "<th><input type='text' name='".$key."' value='".$search[$key]."'></th>";
                 }
                 ?>
-              <th><input type="submit" name="" ></th>
+              <th><input type="submit" class="valid" name="" ></th>
               </form>
             </tr>
            </thead>
@@ -56,6 +56,7 @@ if (isset($bdd)) {
             <p>Capacité : ' . $chambre->capacite . ' place'.$pluriel.'</p>
             <p>Nombre douche : ' .$chambre->douche .'</p>
             <p>Nombre étage : ' .$chambre->etage .'</p>
+            </div>
             <form action="PageReservation.php" method="GET">
                 <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
@@ -68,11 +69,11 @@ if (isset($bdd)) {
             </form>
             <form action="loginRegister/RemoveChambre.php" method="post">
                 <input type="hidden" name="numero" value="'.$chambre->numero.'">
-                <input type="submit" value="Supprimer"/>
+                <input type="submit" class="suppr" value="Supprimer"/>
             </form>';
             }
             echo '
-          </div>
+          
         </div>';
         }
     } else {

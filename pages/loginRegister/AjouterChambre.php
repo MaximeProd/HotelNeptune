@@ -42,14 +42,13 @@ if(isset($_POST)){
     }
     $bdd = getDataBase();
     if (!isset($_SESSION["erreur"])) {
-        if ($_POST["modif"] != "false"){
+        if ($_POST["modif"] != ""){
             unset($_POST["image"]);
             $modif = $_POST["modif"];
             unset($_POST["modif"]);
             unset($_POST["monfichier"]);
-            var_dump($_POST);
             updateListe($bdd,'chambres',$_POST,"numero=".$modif);
-            $_SESSION["erreur"] = "Chambre modifié avec succée !";
+            $_SESSION["erreur"] = "Chambre modifié avec succès !";
             unset($_SESSION['saveChambre']);
             header('Location: ../index.php');
         } else {
@@ -58,6 +57,7 @@ if(isset($_POST)){
             unset($_POST["monfichier"]);
             insertListe($bdd, "chambres", $_POST);
             $_SESSION["erreur"] = "Chambre ajouté avec succée !";
+            unset($_SESSION['saveChambre']);
             header('Location: ../index.php');
         }
     } else {

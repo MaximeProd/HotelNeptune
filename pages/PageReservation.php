@@ -129,7 +129,7 @@ if (isset($bdd)){
 
                         else
                         {
-                            echo '<td>&nbsp;</td>'; // Case vide
+                            echo '<td><p class="case">&nbsp;</p></td>'; // Case vide
                         }
                     }
                     echo '</tr>';

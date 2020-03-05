@@ -66,3 +66,7 @@ input[type=text]{
 .valid:hover{
     border-color: white;
 }
+
+.suppr{
+    margin-left: 8vw;
+}
