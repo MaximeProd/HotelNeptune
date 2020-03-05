@@ -11,15 +11,18 @@ if ($admin) {
         $save = generateSearch($_POST, Array('modif','nomChambre','tarif_id','capacite','exposition','douche','etage'));
         //var_dump($save);
         if ($save['modif'] != ""){
-            var_dump($save['modif']);
-            $chambres = getListe($bdd,"chambres,tarifs",Array("id"=>$save['modif']),Array(),'*',"tarif_id=id");
+            //var_dump($save['modif']);
+            $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$save['modif']),Array(),'*',"tarif_id=id");
             $chambres = $chambres[0];
-            $titre = "Modification de la chambre n°".$chambres->id." alias ".$chambres->chambre;
+            $titre = "Modification de la chambre n°".$chambres->numero." alias ".$chambres->nomChambre;
             $bouttonModif = "Modifier";
             foreach ($save as $key => $item){
-                if($key != "modif"){
+                if ($key != "modif"){
                     $save[$key] = $chambres->$key;
                 }
+
+                //var_dump($save[$key]);
+
             }
         }
     } else {

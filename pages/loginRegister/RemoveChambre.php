@@ -7,7 +7,8 @@ if (isset($bdd)){
     $statement = $bdd->prepare($query);
     $statement->execute();
     $statement->closeCursor();
+    $_SESSION["erreur"]="Chambre supprimé avec succés";
 } else {
     $_SESSION["erreur"]=7;
 }
-header('Location: ../GérerMembres.php');
+header('Location: ../index.php');
