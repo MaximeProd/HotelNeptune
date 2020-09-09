@@ -8,9 +8,9 @@ $_SESSION['savePostLogin'] = $_POST;
 
 if(isset($bdd)){
     $_SESSION["erreur"] = null;
-    if (isset($listPost['mdp']) AND isset($listPost['email'])){
-        $password = htmlspecialchars($_POST['mdp']);
-        $liste = getListe($bdd,'membres',Array("email" => $listPost['email']),Array(),'mdp,id');
+    if (isset($listPost['u_password']) AND isset($listPost['u_email'])){
+        $password = htmlspecialchars($_POST['u_password']);
+        $liste = getListe($bdd,'user',Array("u_email" => $listPost['u_email']),Array(),'u_password,u_id');
         if(!empty($liste)){
             if(count($liste)==1 && password_verify($password,$liste[0]->mdp)){
                 $idClient = $liste[0]->id;
@@ -33,12 +33,11 @@ if(isset($bdd)){
     $_SESSION["erreur"] = 7;
 }
 if (isset($_SESSION['idClient'])){
-    header('Location: ../MonCompte.php');
+    header('Location: ../Moncompte');
 } else {
-    header('Location: ../LoginRegister.php');
+    header('Location: ../Inscription');
 }
-
-
+//TODO AJOUTER UNE PAGE COMPTE
 
 
 
