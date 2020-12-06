@@ -73,7 +73,7 @@ if (isset($bdd)){
                </thead>
                <thead> 
                 <tr>
-                  <form autocomplete="off" class="" action="MesReservations.php" method="post">
+                  <form autocomplete="off" class="" action="Classe.php" method="post">
                   <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
                   <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
                   <input type="hidden" name="selectclient" value="'.$idClient.'">
@@ -89,7 +89,7 @@ if (isset($bdd)){
                     <tr>
                     <td>'.$chambre->nomChambre.'</td>
                     <td>'.$chambre->jour.'</td>
-                   <td><form class="" action="MesReservations.php" method="post"><input type="hidden" name="previewNum" value="'.$chambre->numero.'"><input type="submit" class="voir" value="Voir"></form></td>
+                   <td><form class="" action="Classe.php" method="post"><input type="hidden" name="previewNum" value="'.$chambre->numero.'"><input type="submit" class="voir" value="Voir"></form></td>
                    <td><input type="hidden" name="selectclient" value="'.$idClient.'"></td>
                         </tr>
                     </tbody>';
@@ -102,7 +102,7 @@ if (isset($bdd)){
         </table>';
 
     } else {
-    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="LoginRegister.php"> > Page connexion < </a>');
+    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="Inscriptions.php"> > Page connexion < </a>');
     }
 }
 

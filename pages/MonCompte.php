@@ -4,7 +4,7 @@ require 'paterns/Head.php';
 
 //Partie code
 if (!isset($_SESSION['idClient'])){
-    header('Location: LoginRegister.php');
+    header('Location: Inscriptions.php');
 } else {
     if (isset($bdd)) {
         $membre = getListe($bdd, "membres", array("id" => $idClient));

@@ -25,7 +25,7 @@ if (isset($bdd)){
            </thead>
            <thead> 
             <tr>
-              <form autocomplete="off" class="" action="GérerMembres.php" method="post">
+              <form autocomplete="off" class="" action="Professeurs.php" method="post">
               <th><input type="text" name="id" value="'.$search['id'].'"></th>
               <th><input type="text" name="nom" value="'.$search['nom'].'"></th>
               <th><input type="text" name="prenom" value="'.$search['prenom'].'"></th>
@@ -45,7 +45,7 @@ if (isset($bdd)){
                 <td>'.$membre->nom.'</td>
                 <td>'.$membre->prenom.'</td>
                 <td>'.$membre->email.'</td>
-               <th><form class="" action="MesReservations.php" method="post"><input type="submit" class="bonsoir" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
+               <th><form class="" action="Classe.php" method="post"><input type="submit" class="bonsoir" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
                 <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" class="bonsoir" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
                 </tr>
                 </tbody>';

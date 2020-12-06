@@ -2,7 +2,7 @@
 session_start();
 $idEtudiant = null;
 $Compte = 'Se connecter/Inscription';
-$lien = "LoginRegister.php";
+$lien = "Inscriptions.php";
 if (isset($_SESSION['idClient'])){
     $idEtudiant = $_SESSION['idEtudiant'];
     $Compte = 'Mon Compte';
@@ -15,7 +15,7 @@ $pageAdmin = '';
 if (isset($_SESSION['admin'])){
     $admin = $_SESSION['admin'];
     if ($admin == 1){
-    $pageAdmin = '<li><a href="GérerMembres.php">Gérer les membres</a></li>';
+    $pageAdmin = '<li><a href="Professeurs.php">Gérer les membres</a></li>';
     }
 }
 
@@ -60,7 +60,7 @@ echo '
     <main>
       <div class="liste">
         <li><a href="index.php">Accueil</a></li>
-        <li><a href="MesReservations.php">Mes réservations</a></li>
+        <li><a href="Classe">Nos Classes/a></li>
         '.$pageAdmin.'
         <li><a href="'.$lien.'">'.$Compte.'</a></li>
       </div>

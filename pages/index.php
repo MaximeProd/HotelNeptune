@@ -11,7 +11,7 @@ if (isset($bdd)) {
     $search = generateSearch($_POST, Array("nomChambre","douche","capacite","exposition","numero","prix")); //
     $chambres = getListe($bdd,"chambres,tarifs",Array(),$search,'*',"tarif_id=id");
     ?>
-       <link rel="stylesheet" href="../css/GérerMembres.css">
+       <link rel="stylesheet" href="../css/Professeurs.css">
        <div class="cadre">
        <div class="bandeau">
        <table class="Les chambres :">
@@ -63,7 +63,7 @@ if (isset($bdd)) {
             </form>';
             if ($admin){
                 echo '
-                <form action="GérerChambres.php" method="post">
+                <form action="Etudiants.php" method="post">
                 <input type="hidden" name="modif" value="'.$chambre->numero.'">
                 <input type="submit" value="Modifer"/>
             </form>
