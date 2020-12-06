@@ -46,7 +46,7 @@ if (isset($bdd)){
                 <td>'.$membre->prenom.'</td>
                 <td>'.$membre->email.'</td>
                <th><form class="" action="Classe.php" method="post"><input type="submit" class="bonsoir" value="Voir"><input type="hidden" name="selectclient" value="'.$membre->id.'"></form></th>
-                <th><form class="" action="loginRegister/Remove.php" method="post"><input type="submit" class="bonsoir" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
+                <th><form class="" action="loginRegister/RemoveEtudiants.php" method="post"><input type="submit" class="bonsoir" value="Supprimer"><input type="hidden" name="id" value="'.$membre->id.'"></form></th>
                 </tr>
                 </tbody>';
         }

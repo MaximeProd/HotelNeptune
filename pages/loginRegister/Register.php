@@ -31,10 +31,10 @@ if (isset($bdd)){
         $_SESSION['idClient'] = $listeNewMembre->id;
         header('Location: ../MonCompte.php');
     } else {
-        header('Location: ../LoginRegister.php');
+        header('Location: ../Inscriptions.php');
     }
 } else {
     $_SESSION["erreur"] = 7;
-    header('Location: ../LoginRegister.php');
+    header('Location: ../Inscriptions.php');
 }
 
