@@ -5,12 +5,12 @@ require 'paterns/Head.php';
 
 echo 'Bonsoir!';
 
-$numChambre = getPost('numChambre');
+$nomEtudiant = getPost('nomEtudiant ');
 
-var_dump($idClient);
-var_dump($numChambre);
-echo $idClient.'<br>';
-echo $numChambre;
+var_dump($idEtudiant);
+var_dump($nomEtudiant);
+echo $idEtudiant.'<br>';
+echo $nomEtudiant;
 ?>
 
 
