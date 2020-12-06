@@ -1,0 +1,71 @@
+form{
+  display: flex;
+  flex-direction: column;
+  width: 5vw;
+}
+table{
+  color: white;
+  width: fill;
+  margin-left: 35vw;
+  margin-top: 3vw;
+}
+.body{
+  display: flex;
+  align-items: center;
+}
+.cadre{
+  display: flex;
+  justify-content: center;
+  height: fill;
+}
+.bandeau{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 60%;
+  margin-bottom: -1vw;
+}
+
+input{
+  margin-bottom: 1vw;
+}
+
+.rechercher{
+  width: 8vw;
+  height: 1.8vw;
+  border-radius: 1vw;
+  cursor: pointer;
+  font-size: 1vw;
+  font-weight: bold;
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+
+.rechercher:hover{
+  border-color: white;
+}
+
+.voir{
+  font-size: 0.8vw;
+  width: 8vw;
+  cursor: pointer;
+  margin-top: 0.5vw;
+}
+
+.voir:hover{
+  border-color: black;
+}
+
+th{
+  font-size: 1.3vw;
+}
+
+.nul{
+  font-size: 1.3vw;
+}
+
+caption{
+  font-size: 1.3vw;
+  margin-bottom: 2vw;
+  font-weight: bold;
+}

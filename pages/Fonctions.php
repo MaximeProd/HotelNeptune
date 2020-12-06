@@ -6,8 +6,8 @@
 //https://www.php.net/manual/fr/control-structures.foreach.php
 function getDataBase() {
     try {
-        $bdd = new PDO('mysql:host=mysql2.montpellier.epsi.fr;dbname=espanacultura;charset=utf8;port=5306',
-            'rodrigue.cimas', '864AC0', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        $bdd = new PDO('mysql:host=mysql.montpellier.epsi.fr;dbname=bddneptune;charset=utf8;port=5206',
+            'maxime.bourrier', 'Cartoon-11', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
     } catch (Exception $exception) {
         $bdd = null;
@@ -61,26 +61,26 @@ function getPost($askGet){
     }
 }
 
-function displayEtudiant($etudiant)
+function displayChambre($chambres)
 {
-    if ($etudiant) {
-        foreach ($etudiant as $etudiants)
+    if ($chambres) {
+        foreach ($chambres as $chambre) {
             // Afficher
             echo '
         <div class="chambre">
-          
+          <img src="images/neptune.png">
           <div class="division">
-            <h2>Chambre ' . $etudiant->nom . '</h2>
-            <p> wesh</p>
+            <h2>Chambre ' . $chambre->numero . '</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  </p>
             <form action="PageReservation.php" method="POST">
-                <input type="hidden" name="nomEtudiant" value="'.$etudiant->nom.'">
+                <input type="hidden" name="numChambre" value="'.$chambre->numero.'">
                 <input type="submit" value="Voir les réservations"/>
             </form>
           </div>
         </div>
         ';
         }
-
+    }
     else {
             echo "<p>Aucun résulat</p>";
         }

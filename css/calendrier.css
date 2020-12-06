@@ -1,0 +1,111 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.valid:hover{
+  border-color: white;
+}
+
+.valid{
+  width:8vw;
+  position: absolute;
+  padding-bottom: 0;
+  font-size: 0.8vw;
+  margin-left: 72vw;
+  border-radius: 1vw;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-color: red;
+}
+}
+.select{
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+.calendriers{
+  display: flex;
+  flex-direction: row;
+}
+
+.checkboxCalendrier {
+display: none;
+}
+td{
+  background-color: #6a8494;
+  width: 0.5vw;
+}
+.red{
+  background-color: red;
+}
+.blue{
+  background-color: blue;
+}
+.yellow{
+  background-color: #d6800f;
+}
+
+.lock{
+  display: block;
+
+  text-align: center;
+  color: #fff;
+  user-select: none;
+}
+.open {
+  display: block;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0s;
+}
+.open::before {
+  transition: background-color 0.2s;
+}
+
+.open:hover, .checkboxCalendrier:focus + .open {
+  background-color: #96ffb1;
+}
+
+.checkboxCalendrier:checked + .open {
+  background-color: green;
+}
+
+.checkboxCalendrier:checked + .open::before {
+  background-color: #fff;
+}
+.bandeau{
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 60%;
+  margin-bottom: -1vw;
+}
+
+.cadre{
+  display: flex;
+  justify-content: center;
+  height: fill;
+}
+.case {
+  padding: 1vw;
+}
+
+.plus{
+  cursor: pointer;
+}
+.plus:hover{
+  border-color: black;
+}
+
+.moin{
+  cursor: pointer;
+}
+.moin:hover{
+  border-color: black;
+}

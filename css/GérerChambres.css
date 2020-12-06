@@ -1,0 +1,58 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 39vw;
+    margin-top: 3vw;
+    width: 17vw;
+}
+
+table{
+    color: white;
+    width: fill;
+}
+
+.body{
+    display: flex;
+    align-items: center;
+}
+
+.cadre{
+    display: flex;
+    justify-content: center;
+    height: fill;
+}
+
+.bandeau{
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 60%;
+    margin-bottom: -1vw;
+}
+
+input, select{
+    margin-bottom: 1vw;
+    height: 1.6vw;
+    width: 18vw;
+}
+
+label{
+    font-size: 1.2vw;
+}
+
+.valider{
+    width: 10vw;
+    height: 2vw;
+    font-size: 1vw;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    border-radius: 1vw;
+    border-color: red;
+    cursor: pointer;
+    margin-left: 3vw;
+    margin-top: 1vw;
+}
+
+.valider:hover{
+    border-color: white;
+}

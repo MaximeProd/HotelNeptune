@@ -45,3 +45,8 @@
   background-color: black;
   font-family: 'Acme', sans-serif;
 }
+
+.civilite{
+  display:flex;
+  flex-direction: row;
+}
