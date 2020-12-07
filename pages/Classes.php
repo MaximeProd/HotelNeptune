@@ -2,24 +2,24 @@
 require 'paterns/Head.php';
 
 if (isset($bdd)){
-    if ($idClient !=0) {
-        $titrePage = "Vos réservations : ";
+    if ($id !=0) {
+        $Titre = "Les Classes : ";
         $search = Array();
-        //On précomplèe une liste pour avoir le tableau associatif avec toute les clées
+
         if (isset($_POST)){
-            $listeElement = Array('chambre_id','jour','previewNum');
-            foreach ($listeElement as $item) {
-                if (isset($_POST[$item])){
-                    $search += [$item => $_POST[$item]];
+            $listeClasse= Array('id','nom');
+            foreach ( $listeClasse as $classe) {
+                if (isset($_POST[$classe])){
+                    $search += [$classe => $_POST[$classe]];
                 }   else {
-                    $search += [$item => ""];
+                    $search += [$classe => ""];
                 }
             }
-            if (!empty($_POST['selectclient'])) {
-                $idClient = $_POST['selectclient'];
-                $fullName = getListe($bdd, 'membres',Array('id'=>$idClient),Array(),'nom,prenom');
-                $fullName = $fullName[0];
-                $titrePage = "Réservation du client n°".$idClient."\n alias (".$fullName->nom. " ".$fullName->prenom. ")";
+            if (!empty($_POST['selectclasse'])) {
+                $id = $_POST['selectclasse'];
+                $fullClasse = getListe($bdd, 'classe',Array('id'=>$id),Array(),'nom');
+                $fullClasse = $fullClasse[0];
+
             }
         }
 

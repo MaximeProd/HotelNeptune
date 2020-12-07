@@ -4,12 +4,12 @@ require 'paterns/Head.php';
 if ($admin) {
 
 //On précomplète les clées de la liste assiociative qui sert à autocompléter les champs de la page
-    $titre = "Ajout d'une chambre";
+    $Titre = "Ajouter un étudiant";
     $bouttonModif = "Ajouter";
 
-    if (!isset($_SESSION['saveChambre'])){
+    if (!isset($_SESSION['saveEtudiant'])){
         $save = generateSearch($_POST, Array('modif','nomChambre','tarif_id','capacite','exposition','douche','etage'));
-        //var_dump($save);
+
         if ($save['modif'] != ""){
             //var_dump($save['modif']);
             $chambres = getListe($bdd,"chambres,tarifs",Array("numero"=>$save['modif']),Array(),'*',"tarif_id=id");

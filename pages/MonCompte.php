@@ -3,7 +3,7 @@
 require 'paterns/Head.php';
 
 //Partie code
-if (!isset($_SESSION['idClient'])){
+if (!isset($_SESSION['id'])){
     header('Location: Inscriptions.php');
 } else {
     if (isset($bdd)) {

@@ -18,14 +18,14 @@ if(isset($bdd)){
                 unset($_SESSION['savePostLogin']);
             } elseif (count($liste) > 1){
                 $_SESSION['idClient'] = $idClient;
-                //Erreur : Il existe plusieurs client avec la même adresse mail!! Grosse erreur d'identification!
+
                 $_SESSION["erreur"] = 1;
             } else {
-                //Erreur fréquente : le mot de passe ou l'email ne correspond pas
+
                 $_SESSION["erreur"] = 2;
             }
         } else {
-            //Erreur aussi fréquente : L'email n'est pas reconnu
+
             $_SESSION["erreur"] = 3;
         }
     }
@@ -33,11 +33,11 @@ if(isset($bdd)){
     $_SESSION["erreur"] = 7;
 }
 if (isset($_SESSION['idClient'])){
-    header('Location: ../Moncompte');
+    header('Location: ../MonCompte.php');
 } else {
-    header('Location: ../Inscription');
+    header('Location: ../Inscription.php');
 }
-//TODO AJOUTER UNE PAGE COMPTE
+
 
 
 

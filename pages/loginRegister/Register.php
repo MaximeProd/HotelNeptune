@@ -12,8 +12,8 @@ if (isset($bdd)){
         //Vérification mdp
         if ($_POST['mdp'] == $_POST['confirmMdp']) {
             //Vérification email unique
-            $emails = getListe($bdd,'membres',Array('email' => $_POST['email']),Array(),'email');
-            if (!empty($emails)) {
+            $nom = getListe($bdd,'etudiant',Array('nom' => $_POST['nom']),Array(),'nom');
+            if (!empty($nom)) {
                 $_SESSION["erreur"] = 5;
             }
         } else {
@@ -24,11 +24,11 @@ if (isset($bdd)){
         //Cryptage mdp :
         $_POST['mdp'] = password_hash($_POST['mdp'],PASSWORD_DEFAULT);
         unset($_POST['confirmMdp']);
-        insertListe($bdd,'membres',$_POST);
+        insertListe($bdd,'etudiant',$_POST);
         unset($_SESSION['savePostRegister']);
-        $listeNewMembre = getListe($bdd,'membres',Array("email" => $_POST['email']),Array(),'id');
-        $listeNewMembre = $listeNewMembre[0];
-        $_SESSION['idClient'] = $listeNewMembre->id;
+        $listeNouveauEtudiant = getListe($bdd,'etudiant',Array('nom' => $_POST['nom']),Array(),'id');
+        $listeNouveauEtudiant = $listeNouveauEtudiant[0];
+        $_SESSION['id'] = $listeNouveauEtudiant->id;
         header('Location: ../MonCompte.php');
     } else {
         header('Location: ../Inscriptions.php');
