@@ -1,5 +1,5 @@
 <?php
-//Une variable $idClient est disponible à chaque page.
+
 require 'paterns/Head.php';
 
 //Partie code
@@ -7,11 +7,8 @@ if (!isset($_SESSION['id'])){
     header('Location: Inscriptions.php');
 } else {
     if (isset($bdd)) {
-        $membre = getListe($bdd, "membres", array("id" => $idClient));
-
-        //var_dump($idClient                                                                                    );
-        //var_dump($membre);
-        $membre = $membre[0];
+        $etudiant = getListe($bdd, "etudiant", array("id" => $id));
+        $etudiant = $etudiant[0];
 
         echo '<link rel="stylesheet" href="../css/MonCompte.css">
               <div class="cadre">
@@ -21,12 +18,10 @@ if (!isset($_SESSION['id'])){
                   <h4>Informations personnelles</h4>
                   <hr>
                   <form class="" action="loginRegister/Update.php" method="post">
-                      <input type="hidden" name="civilite"        value="' . $membre->civilite . '" required>
-                      <label for="nom">Nom</label>                 <input type="text" name="nom"        value="' . $membre->nom . '"            placeholder="Nom"            maxlength="100" minlength="3" required>
-                      <label for="prenom">Prénom</label>           <input type="text" name="prenom"     value="' . $membre->prenom . '"         placeholder="Prénom"         maxlength="70"  minlength="3" required>
-                      <label for="adresse">Adresse</label>         <input type="text" name="adresse"    value="' . $membre->adresse . '"        placeholder="Adresse"        maxlength="200">
-                      <label for="ville">Ville</label>             <input type="text" name="ville"      value="' . $membre->ville . '"          placeholder="Ville"          maxlength="200">
-                      <label for="codePostal">Code postal</label>  <input type="text" name="codePostal" value="' . $membre->codePostal . '"     placeholder="Code postal"    maxlength="10">
+                      <input type="hidden" name="civilite"        value="' . $etudiant->civilite . '" required>
+                      <label for="nom">Nom</label>                 <input type="text" name="nom"        value="' . $etudiant->nom . '"            placeholder="Nom"            maxlength="100" minlength="3" required>
+                      <label for="prenom">Prénom</label>           <input type="text" name="prenom"     value="' .  $etudiant->prenom . '"         placeholder="Prénom"         maxlength="70"  minlength="3" required>
+                     
                     <input id="Modif" type="submit" name="" value="Modifier son compte">
                   </form>
                 </div>

@@ -23,33 +23,25 @@ if (isset($bdd)){
             }
         }
 
-
-
-
-
-
-        //Augmenter la fonction getliste en mettant une liste dans le search
-
-        $chambres = getListe($bdd,'planning, chambres',Array('client_id'=>$idClient),Array('jour'=>$search['jour'],'chambre_id'=>$search['chambre_id']),'*',"numero = chambre_id");
+        $classe = getListe($bdd,'classe',Array('id'=>$id),Array('nom'=>$search['nom']));
         if ($search["previewNum"] != ""){
-            $preview = getListe($bdd,"chambres,tarifs",Array('numero'=>$search["previewNum"]),Array(),'*',"tarif_id=id");
+            $preview = getListe($bdd,'classe',Array('id'=>$id),Array('nom'=>$search['nom']));
             $preview = $preview[0];
-            $pluriel ="";
-            if($preview->capacite > 1) {
-                $pluriel = "s";
-            }
+
 
             echo '
-         <link rel="stylesheet" href="../css/pageReservation.css">
-           <div class="chambre">
-          <img src="images/chambre'.$preview->numero.'_1.png">
-           <h2>' . $preview->nomChambre . '</h2>
-          <div class="division">
+     
+           <div class="etudiant">
+          <img src="images/espanacultura.jpg>
+           <h2>' . $preview->nometudiant.'</h2>
            
-            <p>Prix : ' . $preview->prix . ' €</p>
-            <p>Capacité : ' . $preview->capacite . ' place'.$pluriel.'</p>
-            <p>Nombre douche : ' .$preview->douche .'</p>
-            <p>Nombre étage : ' .$preview->etage .'</p>
+       
+           
+            <p>Id : ' . $preview->id . ' €</p>
+            <p>Classe : ' . $preview->classe .'</p>
+            <p>Nom: ' .$preview->nom.'</p>
+            <p>Prénom: ' .$preview->prenom .'</p>
+            <p>Id Classe: ' .$preview->id_classe .'</p>
           
           </div>
         </div>
@@ -62,35 +54,35 @@ if (isset($bdd)){
 
 
     echo  '   
-           <link rel="stylesheet" href="../css/MesReservations.css">
+           
            <table>
-              <caption>'.$titrePage.'</caption>
+              <caption>'.$Titre.'</caption>
                <thead> 
                 <tr> 
                     <th>Nom</th>
-                    <th>Date</th>
+                    <th>Prénom</th>
                 </tr>
                </thead>
                <thead> 
                 <tr>
                   <form autocomplete="off" class="" action="Classe.php" method="post">
-                  <th><input type="text" name="chambre_id" value="'.$search['chambre_id'].'"></th>
-                  <th><input type="text" name="jour" value="'.$search['jour'].'"></th>
-                  <input type="hidden" name="selectclient" value="'.$idClient.'">
+                  <th><input type="text" name="nom" value="'.$search['nom'].'"></th>
+                  <th><input type="text" name="prenom" value="'.$search['prenom'].'"></th>
+                  <input type="hidden" name="idetudiant" value="'.$id.'">
                   <th><input type="submit" class="rechercher" value="Rechercher"></th>
                   </form> 
                 </tr>
                </thead>
               ';
-        if(!empty($chambres)) {
-            foreach ($chambres as $chambre) {
+        if(!empty($etudiants)) {
+            foreach ($etudiants as $etudiant) {
                 echo
                     '<tbody>
                     <tr>
-                    <td>'.$chambre->nomChambre.'</td>
-                    <td>'.$chambre->jour.'</td>
-                   <td><form class="" action="Classe.php" method="post"><input type="hidden" name="previewNum" value="'.$chambre->numero.'"><input type="submit" class="voir" value="Voir"></form></td>
-                   <td><input type="hidden" name="selectclient" value="'.$idClient.'"></td>
+                    <td>'.$etudiants->nometudiant.'</td>
+                    <td>'.$etudiant->prenom.'</td>
+                   <td><form class="classe" action="Classe.php" method="post"><input type="hidden" name="previewNum" value="'.$etudiant->id.'">
+                   <td><input type="hidden" name="selectclient" value="'.$idetudiant.'"></td>
                         </tr>
                     </tbody>';
             }
@@ -102,7 +94,7 @@ if (isset($bdd)){
         </table>';
 
     } else {
-    afficherErreur('Vous devez être connecté pour voir vos réservations : <a href="Inscriptions.php"> > Page connexion < </a>');
+    afficherErreur('Vous devez être connecté pour voir les classes : <a href="Inscriptions.php"> > Page connexion < </a>');
     }
 }
 

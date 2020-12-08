@@ -1,13 +1,13 @@
 <?php
 session_start();
 require '../Fonctions.php';
-$idClient = $_SESSION["idClient"];
+$id = $_SESSION["id"];
 $bdd = getDataBase();
 if (isset ($bdd)) {
     $password = htmlspecialchars($_POST['mdp']);
-    $liste = getListe($bdd,'membres',Array("id" => $_SESSION['idClient']),Array(),'mdp');
+    $liste = getListe($bdd,'etudiant',Array("id" => $_SESSION['id']),Array(),'mdp');
     if (password_verify($password, $liste[0]->mdp)) {
-        $query = "DELETE FROM membres WHERE id=" . $idClient;
+        $query = "DELETE FROM etudiant WHERE id=" . $id;
         $statement = $bdd->prepare($query);
         $statement->execute();
         $statement->closeCursor();

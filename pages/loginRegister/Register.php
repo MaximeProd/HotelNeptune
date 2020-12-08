@@ -6,12 +6,12 @@ $bdd = getDataBase();
 $_SESSION['savePostRegister'] = $_POST;
 if (isset($bdd)){
     $insert = Array();
-    //Partie vérification qu'il n'y est pas d'erreur dans l'enregistrement
+
     if (isset($_POST)){
-        //Pas besoin de vérifier que le formulaire est plein -> déjà gérer par l'html
-        //Vérification mdp
+
+
         if ($_POST['mdp'] == $_POST['confirmMdp']) {
-            //Vérification email unique
+
             $nom = getListe($bdd,'etudiant',Array('nom' => $_POST['nom']),Array(),'nom');
             if (!empty($nom)) {
                 $_SESSION["erreur"] = 5;

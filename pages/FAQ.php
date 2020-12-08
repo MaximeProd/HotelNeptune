@@ -10,12 +10,11 @@ require 'paterns/Head.php';
 <main class="placement">
     <div class="font">
 
-        <br>Qui somme-nous? <br>
-        <br> Tarif <br>
-        <br> Mention l'égale<br>
-        <br> Assistance  <br>
-        <br> Fonctionnement Du Site  <br>
-        <br> Aide <br>
+        <br> Qui somme-nous? <br>
+        <br> Comment ça marche ? <br>
+        <br> Mention l'égale <br>
+        <br> Aide  <br>
+
     </div>
 </body>
 </html>
