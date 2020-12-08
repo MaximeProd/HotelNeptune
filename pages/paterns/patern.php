@@ -15,7 +15,7 @@ echo
   <body>
     <header>
       <div class="haut">
-        <img src="../images/neptune.png">
+        <img src="../images/espanacultura.jpg" alt="">
         <h1>Hotel Neptune</h1>
       </div>
     </header>
@@ -28,23 +28,21 @@ echo
       <div class="fake">
         &nbsp
         <div class="chambre">
-          <img src="../images/neptune.png">
+          <img src="../images/espanacultura.jpg" alt="">
           <div class="division">
-            <h2>Chambre num</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  </p>
-            <input type="button" name="Chambe" value="Disponible">
+           
           </div>
         </div>
       </div>
     </main>
     <footer>
       <div class="footer">
-        <a href="#">Qui somme-nous? </a>
-        <a href="#">Tarif </a>
-        <a href="#">Mention légale </a>
-        <a href="#">Asssistance </a>
-        <a href="#">Fonctionnement Du Site </a>
-        <a href="#">Aide </a>
+        <a href="#">FAQ </a>
+        <a href="#">Recrutement </a>
+        <a href="#">Enseignement</a>
+        <a href="#">Contact </a>
+        <a href="#">Réseaux Sociaux </a>
+
       </div>
       <div class="Copyright">
         <a>©️ Copyright 2019</a>

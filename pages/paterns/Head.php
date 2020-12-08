@@ -3,7 +3,7 @@ session_start();
 $idEtudiant = null;
 $Compte = 'Se connecter/Inscription';
 $lien = "Inscriptions.php";
-if (isset($_SESSION['idClient'])){
+if (isset($_SESSION['id'])){
     $idEtudiant = $_SESSION['idEtudiant'];
     $Compte = 'Mon Compte';
     $lien = "MonCompte.php";
@@ -15,7 +15,7 @@ $pageAdmin = '';
 if (isset($_SESSION['admin'])){
     $admin = $_SESSION['admin'];
     if ($admin == 1){
-    $pageAdmin = '<li><a href="Professeurs.php">Gérer les membres</a></li>';
+    $pageAdmin = '<li><a href="pages/Etudiants.php">Gérer les étudiants</a></li>';
     }
 }
 
@@ -29,30 +29,20 @@ echo '
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Hotel Neptune</title>
+    <title>Espana Cultura</title>
     <link rel="stylesheet" href="../css/index.css">
     <link href="https://fonts.googleapis.com/css?family=Acme|Sniglet&display=swap" rel="stylesheet">
-    <!--
-    font-family: "Sniglet", cursive; →Titre
-    font-family: "Acme", sans-serif; →Texte
-  -->
+
   </head>
   <body>
     <header>
       <div class="haut">
-        <img src="images/neptune.png">
-        <h1>Hotel Neptune</h1>
+      
+        <h1>EspanaCultura</h1>
       </div>
     </header>
-    <footer>
-      <div class="footer">
-        <a href="#">Qui somme-nous? </a>
-        <a href="#">Tarif </a>
-        <a href="#">Mention légale </a>
-        <a href="#">Asssistance </a>
-        <a href="#">Fonctionnement Du Site </a>
-        <a href="#">Aide </a>
-      </div>
+   
+     
       <div class="Copyright">
         <p>© Copyright 2020</p>
       </div>
